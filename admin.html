@@ -2832,6 +2832,8 @@
             
             const slug = document.getElementById('p-slug').value || document.getElementById('p-name').value.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '') || 'PROD';
             
+            tbody.innerHTML = ''; // Clear existing variants before auto-generating new matrix combinations
+            
             sizes.forEach(s => {
                 colors.forEach(c => {
                     if (s && c) {
@@ -2864,13 +2866,13 @@
                         <span>/</span>
                         <input type="text" class="form-input v-color-input" style="padding: 2px 5px; font-size: 0.7rem; width: 80px;" value="${data.color}" oninput="updateVariantRowSKU(this)">
                     </div>
+                    <input type="hidden" class="v-size" value="${data.size || ''}">
+                    <input type="hidden" class="v-color" value="${data.color || ''}">
                 </td>
                 <td><input type="text" class="form-input v-sku" style="padding: 5px; font-size: 0.7rem;" value="${data.sku || ''}"></td>
                 <td><input type="number" class="form-input v-price" style="padding: 5px; font-size: 0.7rem;" value="${data.price || ''}"></td>
                 <td><input type="number" class="form-input v-stock" style="padding: 5px; font-size: 0.7rem;" value="${data.stock || 0}"></td>
                 <td><button onclick="this.closest('tr').remove(); autoRegenerateSKUs();" style="background:none; border:none; color:#ff4d4d;"><i class="fas fa-trash"></i></button></td>
-                <input type="hidden" class="v-size" value="${data.size || ''}">
-                <input type="hidden" class="v-color" value="${data.color || ''}">
             `;
             tbody.appendChild(tr);
             if (typeof updateMediaColorDropdowns === 'function') {
