@@ -1,0 +1,676 @@
+<!--
+    Developer Signature & Watermark
+    Name: Mada Dhivakar
+    Contact: dhivakarmada@gmail.com
+    Project: Wild Saala E-Commerce Platform
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WILD SAALA | LOOKBOOK</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="product-utils.css">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --light: #f5f5f5;
+            --accent: #39FF14; /* Neon Green */
+            --accent-alt: #00BFFF; /* Cyber Blue */
+            --gray: #333333;
+            --overlay: rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        header .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        header .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        header nav {
+            display: block;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin-right: 30px;
+        }
+        
+        header nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        header nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        header nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--light);
+            transition: color 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            color: var(--accent);
+        }
+
+        .cart-icon i {
+            font-size: 1.5rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: var(--black);
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 50%;
+            padding: 3px 6px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* Lookbook Showcase */
+        .lookbook-hero {
+            padding: 140px 20px 40px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(57, 255, 20, 0.05) 0%, transparent 70%);
+        }
+
+        .lookbook-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: #fff;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .lookbook-hero p {
+            font-size: 1.1rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+        }
+
+        /* Premium Lookbook Grid */
+        .lookbook-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            aspect-ratio: 4 / 5;
+            display: block;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(57, 255, 20, 0.2);
+        }
+
+        .gallery-item media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover media,
+        .gallery-item:hover video,
+        .gallery-item:hover iframe,
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item video,
+        .gallery-item iframe,
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+            border: none;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+            padding: 30px 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 2;
+        }
+
+        .caption-text h3 {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .gallery-item:hover .caption-text h3 {
+            color: var(--accent);
+        }
+
+        .caption-text p {
+            color: #aaa;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .action-arrow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .action-arrow {
+            background: var(--accent);
+            color: var(--black);
+            border-color: var(--accent);
+            transform: rotate(-45deg);
+        }
+
+        /* Cart Modal styling */
+        #cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay);
+            z-index: 1050;
+            justify-content: flex-end;
+        }
+
+        #cart-modal.show {
+            display: flex;
+        }
+
+        .cart-content {
+            width: 100%;
+            max-width: 450px;
+            background: var(--dark);
+            height: 100%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--gray);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+            animation: slideIn 0.3s forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--gray);
+            padding-bottom: 15px;
+        }
+
+        .cart-close-btn {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .cart-close-btn:hover {
+            color: var(--accent);
+        }
+
+        #cart-items-list {
+            list-style: none;
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .cart-total {
+            border-top: 1px solid var(--gray);
+            padding-top: 20px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .cart-actions button {
+            flex: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            border-top: 1px solid var(--gray);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links li a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links li a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Sticky Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--gray);
+            z-index: 999;
+            padding: 10px 0;
+            display: none;
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.75rem;
+            gap: 4px;
+        }
+
+        .mobile-nav-item.active,
+        .mobile-nav-item:hover {
+            color: var(--accent);
+        }
+
+        .mobile-nav-icon {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            header nav {
+                display: none;
+            }
+            .mobile-nav {
+                display: block;
+            }
+            .lookbook-masonry {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+                <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">WILD SAALA</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="index.html#limited-drop">Drops</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon" id="cart-icon-desktop">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <a href="login.html" class="login-btn" id="login-btn">
+                    <i class="fas fa-user"></i>
+                    Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Lookbook Hero -->
+    <div class="lookbook-hero">
+        <h1>WS LOOKBOOK</h1>
+        <p>Curated visuals of cyber-street culture, midnight rebellion, and luxury urban armor.</p>
+    </div>
+
+    <!-- Gallery Container -->
+    <div class="gallery-container">
+        <div class="lookbook-masonry" id="gallery-masonry-grid">
+            <!-- Dynamic elements loaded here -->
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    
+
+    <!-- Mobile Sticky Navigation -->
+                <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="index.html" class="mobile-nav-item">
+                <i class="fas fa-home mobile-nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="shop.html" class="mobile-nav-item">
+                <i class="fas fa-shopping-bag mobile-nav-icon"></i>
+                <span>Shop</span>
+            </a>
+            <a href="contactus.html" class="mobile-nav-item">
+                <i class="fas fa-question-circle mobile-nav-icon"></i>
+                <span>Contact Us</span>
+            </a>
+            <a href="index.html#limited-drop" class="mobile-nav-item">
+                <i class="fas fa-bolt mobile-nav-icon"></i>
+                <span>Drops</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobile-cart-icon">
+                <i class="fas fa-shopping-cart mobile-nav-icon"></i>
+                <span>Cart (<span class="cart-count-mobile">0</span>)</span>
+            </a>
+            <a href="login.html" class="mobile-nav-item" id="mobile-login-btn">
+                <i class="fas fa-user mobile-nav-icon"></i>
+                <span>Account</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Footer -->
+                <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Shop All</a></li>
+                        <li><a href="hoodies.html">All Hoodies</a></li>
+                        <li><a href="tees.html">T-Shirts</a></li>
+                        <li><a href="tracks.html">Tracks</a></li>
+                        <li><a href="caps.html">Caps</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="sizeguide.html">Size Guide</a></li>
+                        <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchanges</a></li>
+                        <li><a href="washcare.html">Care Instructions</a></li>
+                        <li><a href="contactus.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul class="footer-links">
+                        <li><a href="ourstory.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="contactus.html">Customer Support</a></li>
+                        <li><a href="contactus.html">Wholesale Inquiries</a></li>
+                        <li><a href="collab.html">Collab Requests</a></li>
+                    </ul>
+                    
+                    <div class="social-icons">
+                        <a href="https://instagram.com" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://threads.net" class="social-icon" target="_blank"><i class="fab fa-threads"></i></a>
+                        <a href="https://whatsapp.com" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trust-badges">
+                <div class="badge"><i class="fas fa-lock"></i> SSL Secure</div>
+                <div class="badge"><i class="fas fa-credit-card"></i> Razorpay</div>
+                <div class="badge"><i class="fas fa-truck"></i> Cash on Delivery</div>
+                <div class="badge"><i class="fas fa-shield-alt"></i> 7-Day Returns</div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 WILD SAALA. All rights reserved. | <a href="shippingpolicy.html" style="color: #888; text-decoration: none;">Privacy Policy</a> | <a href="returns.html" style="color: #888; text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS dependencies -->
+    <script src="product-utils.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load lookbook gallery
+            try {
+                const res = await fetch('/api/lookbook');
+                if (!res.ok) throw new Error('Failed to load lookbook data');
+                const items = await res.json();
+                
+                const masonryGrid = document.getElementById('gallery-masonry-grid');
+                if (masonryGrid) {
+                    masonryGrid.innerHTML = '';
+                    
+                    if (items.length === 0) {
+                        masonryGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px 0; color: #666;"><h3>NO LOOKBOOK ENTRIES FOUND</h3></div>`;
+                        return;
+                    }
+
+                    items.forEach(item => {
+                        const linkUrl = item.link || '#';
+                        const a = document.createElement('a');
+                        a.className = 'gallery-item';
+                        a.href = linkUrl;
+                        
+                        if (!item.link || item.link === '#') {
+                            a.style.cursor = 'default';
+                            a.addEventListener('click', (e) => e.preventDefault());
+                        }
+
+                        const mediaHtml = WildSaala.getMediaElementHtml(item.url, item.type, { style: '' });
+
+                        a.innerHTML = `
+                            ${mediaHtml}
+                            <div class="gallery-caption">
+                                <div class="caption-text">
+                                    <h3>${item.caption}</h3>
+                                    <p>${item.type}</p>
+                                </div>
+                                <div class="action-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        `;
+
+                        masonryGrid.appendChild(a);
+                    });
+                }
+            } catch (err) {
+                console.error(err);
+            }
+
+            // Global Cart implementation linkage
+            // Handled automatically by product-utils.js
+        });
+    </script>
+</body>
+</html>

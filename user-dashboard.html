@@ -1,0 +1,796 @@
+<!--
+    Developer Signature & Watermark
+    Name: Mada Dhivakar
+    Contact: dhivakarmada@gmail.com
+    Project: Wild Saala E-Commerce Platform
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WILD SAALA | My Tribe Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --light: #f5f5f5;
+            --accent: #39FF14; /* Neon Green */
+            --gray: #222222;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--light);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        aside {
+            width: var(--sidebar-width);
+            background: var(--dark);
+            border-right: 1px solid var(--gray);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 40px 30px;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            padding: 30px 0;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-item i {
+            width: 20px;
+            font-size: 1.1rem;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--accent);
+            background: rgba(57, 255, 20, 0.05);
+            border-right: 3px solid var(--accent);
+        }
+
+        .sidebar-footer {
+            padding: 30px;
+            border-top: 1px solid var(--gray);
+        }
+
+        .user-mini-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .user-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .user-info p {
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            max-width: 1200px;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        .welcome-msg {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Panels */
+        .panel {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dashboard Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--dark);
+            padding: 30px;
+            border-radius: 5px;
+            border: 1px solid var(--gray);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        /* Table Style */
+        .table-container {
+            background: var(--dark);
+            border-radius: 5px;
+            border: 1px solid var(--gray);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        thead {
+            background: var(--black);
+            color: #666;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        th, td {
+            padding: 20px 30px;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--gray);
+            transition: background 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .status-processing { background: #333; color: #aaa; }
+        .status-shipped { background: rgba(0, 191, 255, 0.2); color: #00BFFF; }
+        .status-delivered { background: rgba(57, 255, 20, 0.2); color: var(--accent); }
+
+        .btn-view {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* Profile Form */
+        .profile-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 800px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 1px solid var(--gray);
+            color: white;
+            border-radius: 3px;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .btn-save {
+            background: var(--accent);
+            color: var(--black);
+            padding: 15px 40px;
+            border: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 3px;
+            grid-column: span 2;
+        }
+
+        /* Mobile Toggle */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: var(--black);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 900px) {
+            aside { transform: translateX(-100%); transition: transform 0.3s ease; }
+            aside.active { transform: translateX(0); }
+            main { margin-left: 0; padding: 20px; }
+            .mobile-toggle { display: flex; }
+            .profile-form { grid-template-columns: 1fr; }
+            .btn-save { grid-column: span 1; }
+        }
+    </style>
+    <link rel="stylesheet" href="product-utils.css">
+</head>
+<body>
+            <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">WILD SAALA</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="index.html#limited-drop">Drops</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon" id="cart-icon-desktop">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <a href="login.html" class="login-btn" id="login-btn">
+                    <i class="fas fa-user"></i>
+                    Login
+                </a>
+            </div>
+        </div>
+    </header>
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">WILD SAALA</a>
+        </div>
+        <nav class="nav-menu">
+            <div class="nav-item active" onclick="showPanel('overview')">
+                <i class="fas fa-th-large"></i> Overview
+            </div>
+            <div class="nav-item" onclick="showPanel('orders')">
+                <i class="fas fa-box"></i> My Orders
+            </div>
+            <div class="nav-item" onclick="showPanel('profile')">
+                <i class="fas fa-user-edit"></i> Profile Settings
+            </div>
+            <div class="nav-item" onclick="showPanel('track')">
+                <i class="fas fa-truck-fast"></i> Track Package
+            </div>
+            <div class="nav-item" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-mini-profile">
+                <div class="avatar" id="user-initials">JS</div>
+                <div class="user-info">
+                    <h4 id="user-fullname">John Saala</h4>
+                    <p id="user-email">john@example.com</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('active')">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <main>
+        <div class="header-row">
+            <div>
+                <h1>Wild Saala Dashboard</h1>
+                <p class="welcome-msg">Welcome back to the tribe, <span id="welcome-name">Explorer</span>!</p>
+            </div>
+            <a href="shop.html" style="background: var(--accent); color: var(--black); padding: 10px 20px; text-decoration: none; font-weight: 800; border-radius: 3px; font-size: 0.8rem;">SHOP NEW DROPS</a>
+        </div>
+
+        <!-- Overview Panel -->
+        <div id="overview-panel" class="panel active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Orders <i class="fas fa-shopping-bag"></i></div>
+                    <div class="stat-value" id="stat-total-orders">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Tribe Points <i class="fas fa-bolt"></i></div>
+                    <div class="stat-value">450</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Status <i class="fas fa-crown"></i></div>
+                    <div class="stat-value" style="font-size: 1.5rem; margin-top: 10px;">ELITE REBEL</div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 20px; font-family: 'Oswald'; text-transform: uppercase;">Recent Activity</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-orders-body">
+                        <!-- Dynamic content -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Orders Panel -->
+        <div id="orders-panel" class="panel">
+            <h3 style="margin-bottom: 30px; font-family: 'Oswald'; text-transform: uppercase; font-size: 2rem;">Full Order History</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Items</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="full-orders-body">
+                        <!-- Dynamic content -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Profile Panel -->
+        <div id="profile-panel" class="panel">
+            <h3 style="margin-bottom: 30px; font-family: 'Oswald'; text-transform: uppercase; font-size: 2rem;">Identity Settings</h3>
+            <div class="profile-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="prof-name" class="form-input" value="John Saala">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="prof-email" class="form-input" value="john@example.com" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="prof-phone" class="form-input" value="+91 9876543210">
+                </div>
+                <div class="form-group">
+                    <label>Default Shipping Address</label>
+                    <input type="text" id="prof-addr" class="form-input" value="123 Street, Urban Jungle">
+                </div>
+                <button class="btn-save" onclick="alert('Profile updated in Tribe Archives!')">UPDATE IDENTITY</button>
+            </div>
+        </div>
+
+        <!-- Track Panel -->
+        <div id="track-panel" class="panel">
+            <h3 style="margin-bottom: 30px; font-family: 'Oswald'; text-transform: uppercase; font-size: 2rem;">Track Your Drop</h3>
+            <div class="stat-card" style="max-width: 600px;">
+                <div class="form-group">
+                    <label>Enter Order ID</label>
+                    <input type="text" id="track-order-id" class="form-input" placeholder="Enter ID (e.g. 1)">
+                </div>
+                <button class="btn-save" style="width: 100%;" onclick="trackOrder()">TRACK PACKAGE</button>
+                
+                <div id="tracking-result" style="margin-top: 40px; display: none;">
+                    <div style="border-left: 2px solid var(--gray); padding-left: 20px;">
+                        <div style="margin-bottom: 20px; position: relative;">
+                            <i class="fas fa-check-circle" style="color: var(--accent); position: absolute; left: -31px; background: var(--black);"></i>
+                            <h5 style="color: var(--accent);" id="track-status-title">ORDER CONFIRMED</h5>
+                            <p style="font-size: 0.8rem; color: #666;" id="track-status-date"></p>
+                        </div>
+                        <div id="tracking-info-box" style="padding: 15px; background: rgba(255,255,255,0.05); border-radius: 5px; margin-top: 20px;">
+                            <p style="font-size: 0.8rem; color: #888;">Logistics Partner: <span id="track-carrier" style="color: white; font-weight: 600;"></span></p>
+                            <p style="font-size: 0.8rem; color: #888;">Tracking ID: <span id="track-id" style="color: var(--accent); font-weight: 600;"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="tracking-error" style="margin-top: 20px; color: #ff4444; display: none;">
+                    Order not found or access denied.
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Detail Modal -->
+        <div id="order-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:2000; overflow-y:auto; padding: 20px;">
+            <div style="background:var(--dark); max-width:800px; margin:40px auto; padding:40px; border-radius:5px; border:1px solid var(--gray); position:relative;">
+                <button onclick="document.getElementById('order-modal').style.display='none'" style="position:absolute; right:20px; top:20px; background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">&times;</button>
+                <h2 id="modal-order-id" style="font-family:'Oswald'; margin-bottom:20px;"></h2>
+                <div id="modal-content"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="product-utils.js"></script>
+    <script>
+        const user = JSON.parse(localStorage.getItem('wildsaala_user'));
+        
+        if (!user) {
+            window.location.href = 'login.html';
+        }
+
+        // Initialize UI
+        document.getElementById('user-fullname').innerText = user.name;
+        document.getElementById('welcome-name').innerText = user.name.split(' ')[0];
+        document.getElementById('user-email').innerText = user.email;
+        document.getElementById('user-initials').innerText = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+        
+        // Form prefill
+        document.getElementById('prof-name').value = user.name;
+        document.getElementById('prof-email').value = user.email;
+
+        function showPanel(panelId) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            
+            document.getElementById(panelId + '-panel').classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            if (window.innerWidth <= 900) {
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        }
+
+        let allOrders = [];
+
+        async function loadOrders() {
+            try {
+                const res = await fetch(`/api/orders?email=${user.email}`);
+                allOrders = await res.json();
+                
+                document.getElementById('stat-total-orders').innerText = allOrders.length;
+                
+                const recentBody = document.getElementById('recent-orders-body');
+                const fullBody = document.getElementById('full-orders-body');
+                
+                recentBody.innerHTML = '';
+                fullBody.innerHTML = '';
+
+                allOrders.forEach((o, i) => {
+                    const statusClass = `status-${o.status.toLowerCase()}`;
+                    const items = JSON.parse(o.items || '[]');
+                    const itemsText = items.map(it => it.name).join(', ');
+
+                    const rowHTML = `
+                        <tr>
+                            <td>#${o.id}</td>
+                            <td>${new Date(o.order_date).toLocaleDateString()}</td>
+                            <td>₹${o.total_amount.toLocaleString()}</td>
+                            <td><span class="status-badge ${statusClass}">${o.status}</span></td>
+                            <td><a href="#" class="btn-view" onclick="viewOrderDetails(${o.id})">View</a></td>
+                        </tr>
+                    `;
+                    
+                    if (i < 5) recentBody.innerHTML += rowHTML;
+                    
+                    fullBody.innerHTML += `
+                        <tr>
+                            <td>#${o.id}</td>
+                            <td>${new Date(o.order_date).toLocaleDateString()}</td>
+                            <td>₹${o.total_amount.toLocaleString()}</td>
+                            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${itemsText}</td>
+                            <td><span class="status-badge ${statusClass}">${o.status}</span></td>
+                            <td><a href="#" class="btn-view" onclick="viewOrderDetails(${o.id})">Details</a></td>
+                        </tr>
+                    `;
+                });
+
+                if (allOrders.length === 0) {
+                    const empty = '<tr><td colspan="5" style="text-align:center; padding: 50px; color: #666;">No orders yet. Start your journey today!</td></tr>';
+                    recentBody.innerHTML = empty;
+                    fullBody.innerHTML = empty;
+                }
+
+            } catch (err) {
+                console.error("Order load error:", err);
+            }
+        }
+
+        function viewOrderDetails(id) {
+            const order = allOrders.find(o => o.id === id);
+            if (!order) return;
+
+            document.getElementById('modal-order-id').innerText = `ORDER #${order.id}`;
+            const content = document.getElementById('modal-content');
+            
+            const items = JSON.parse(order.items || '[]');
+            let itemsHTML = items.map(it => `
+                <div style="display:flex; justify-content:space-between; margin-bottom:10px; border-bottom:1px solid #222; padding-bottom:10px;">
+                    <div>
+                        <p style="font-weight:600;">${it.name}</p>
+                        <p style="font-size:0.8rem; color:#888;">Qty: ${it.qty || 1}</p>
+                    </div>
+                    <p>₹${it.price.toLocaleString()}</p>
+                </div>
+            `).join('');
+
+            content.innerHTML = `
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:30px;">
+                    <div>
+                        <h4 style="color:#666; font-size:0.8rem; text-transform:uppercase; margin-bottom:10px;">Order Status</h4>
+                        <p style="font-weight:700; color:var(--accent); font-size:1.2rem; margin-bottom:20px;">${order.status}</p>
+                        
+                        <h4 style="color:#666; font-size:0.8rem; text-transform:uppercase; margin-bottom:10px;">Items</h4>
+                        ${itemsHTML}
+                        
+                        <div style="margin-top:20px; border-top:2px solid var(--accent); padding-top:10px;">
+                            <div style="display:flex; justify-content:space-between; font-weight:700;">
+                                <p>Total Amount</p>
+                                <p>₹${order.total_amount.toLocaleString()}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="color:#666; font-size:0.8rem; text-transform:uppercase; margin-bottom:10px;">Shipping Details</h4>
+                        <p style="margin-bottom:20px; line-height:1.6;">${order.shipping_address || 'Address not available'}</p>
+                        
+                        <h4 style="color:#666; font-size:0.8rem; text-transform:uppercase; margin-bottom:10px;">Logistics & Tracking</h4>
+                        ${order.tracking_id ? `
+                            <p style="color:#888; font-size:0.9rem;">Partner: <span style="color:white; font-weight:600;">${order.carrier}</span></p>
+                            <p style="color:#888; font-size:0.9rem;">Tracking ID: <span style="color:var(--accent); font-weight:600;">${order.tracking_id}</span></p>
+                        ` : `
+                            <p style="color:#666; font-style:italic;">Logistics information will be available once the order is shipped.</p>
+                        `}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('order-modal').style.display = 'block';
+        }
+
+        function trackOrder() {
+            const idInput = document.getElementById('track-order-id').value.trim();
+            if (!idInput) return;
+            
+            const order = allOrders.find(o => o.id == idInput);
+            const resultBox = document.getElementById('tracking-result');
+            const errorBox = document.getElementById('tracking-error');
+            
+            if (order) {
+                errorBox.style.display = 'none';
+                resultBox.style.display = 'block';
+                document.getElementById('track-status-title').innerText = order.status.toUpperCase();
+                document.getElementById('track-status-date').innerText = `Last updated: ${new Date().toLocaleString()}`;
+                
+                if (order.tracking_id) {
+                    document.getElementById('tracking-info-box').style.display = 'block';
+                    document.getElementById('track-carrier').innerText = order.carrier;
+                    document.getElementById('track-id').innerText = order.tracking_id;
+                } else {
+                    document.getElementById('tracking-info-box').style.display = 'none';
+                }
+            } else {
+                resultBox.style.display = 'none';
+                errorBox.style.display = 'block';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('wildsaala_user');
+            window.location.href = 'index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadOrders);
+    </script>
+            <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Shop All</a></li>
+                        <li><a href="hoodies.html">All Hoodies</a></li>
+                        <li><a href="tees.html">T-Shirts</a></li>
+                        <li><a href="tracks.html">Tracks</a></li>
+                        <li><a href="caps.html">Caps</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="sizeguide.html">Size Guide</a></li>
+                        <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchanges</a></li>
+                        <li><a href="washcare.html">Care Instructions</a></li>
+                        <li><a href="contactus.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul class="footer-links">
+                        <li><a href="ourstory.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="contactus.html">Customer Support</a></li>
+                        <li><a href="contactus.html">Wholesale Inquiries</a></li>
+                        <li><a href="collab.html">Collab Requests</a></li>
+                    </ul>
+                    
+                    <div class="social-icons">
+                        <a href="https://instagram.com" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://threads.net" class="social-icon" target="_blank"><i class="fab fa-threads"></i></a>
+                        <a href="https://whatsapp.com" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trust-badges">
+                <div class="badge"><i class="fas fa-lock"></i> SSL Secure</div>
+                <div class="badge"><i class="fas fa-credit-card"></i> Razorpay</div>
+                <div class="badge"><i class="fas fa-truck"></i> Cash on Delivery</div>
+                <div class="badge"><i class="fas fa-shield-alt"></i> 7-Day Returns</div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 WILD SAALA. All rights reserved. | <a href="shippingpolicy.html" style="color: #888; text-decoration: none;">Privacy Policy</a> | <a href="returns.html" style="color: #888; text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+            <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="index.html" class="mobile-nav-item">
+                <i class="fas fa-home mobile-nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="shop.html" class="mobile-nav-item">
+                <i class="fas fa-shopping-bag mobile-nav-icon"></i>
+                <span>Shop</span>
+            </a>
+            <a href="contactus.html" class="mobile-nav-item">
+                <i class="fas fa-question-circle mobile-nav-icon"></i>
+                <span>Contact Us</span>
+            </a>
+            <a href="index.html#limited-drop" class="mobile-nav-item">
+                <i class="fas fa-bolt mobile-nav-icon"></i>
+                <span>Drops</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobile-cart-icon">
+                <i class="fas fa-shopping-cart mobile-nav-icon"></i>
+                <span>Cart (<span class="cart-count-mobile">0</span>)</span>
+            </a>
+            <a href="login.html" class="mobile-nav-item" id="mobile-login-btn">
+                <i class="fas fa-user mobile-nav-icon"></i>
+                <span>Account</span>
+            </a>
+        </div>
+    </nav>
+</body>
+</html>

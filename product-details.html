@@ -1,0 +1,2275 @@
+<!--
+    Developer Signature & Watermark
+    Name: Mada Dhivakar
+    Contact: dhivakarmada@gmail.com
+    Project: Wild Saala E-Commerce Platform
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | WILD SAALA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="product-utils.css">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #121212;
+            --card: rgba(20, 20, 20, 0.75);
+            --light: #f5f5f5;
+            --accent: #39FF14;
+            --accent-glow: rgba(57, 255, 20, 0.35);
+            --gray: #242424;
+            --glass-border: rgba(57, 255, 20, 0.15);
+            --muted: #666666;
+            --border: #222222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--black);
+            color: var(--light);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 30%, rgba(57, 255, 20, 0.04), transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(57, 255, 20, 0.03), transparent 30%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, .oswald {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Minimal Fixed Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95), transparent);
+            z-index: 1000;
+            padding: 25px 0;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 800;
+            text-shadow: 0 0 12px var(--accent-glow);
+            letter-spacing: 2px;
+            transition: transform 0.3s;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .back-btn {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .back-btn:hover {
+            color: var(--accent);
+            transform: translateX(-3px);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .cart-icon:hover {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--accent);
+            color: var(--black);
+            font-size: 0.7rem;
+            font-weight: 800;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* PDP Page Grid Container */
+        .pdp-container {
+            max-width: 1600px;
+            margin: 120px auto 40px;
+            padding: 0 40px;
+        }
+
+        .pdp-wrapper {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        /* ------------------ LEFT COLUMN: PREMIUM MEDIA THEATER ------------------ */
+        .pdp-media-theater {
+            display: flex;
+            gap: 20px;
+            position: sticky;
+            top: 120px;
+        }
+
+        /* Thumbnail Track */
+        .thumbnail-track {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 5px;
+            min-width: 90px;
+        }
+        .thumbnail-track::-webkit-scrollbar {
+            width: 3px;
+        }
+        .thumbnail-track::-webkit-scrollbar-thumb {
+            background: var(--gray);
+            border-radius: 4px;
+        }
+        .thumbnail-track::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        .thumb-item {
+            width: 80px;
+            height: 100px;
+            border-radius: 4px;
+            border: 1.5px solid var(--border);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: var(--dark);
+            opacity: 0.6;
+        }
+        .thumb-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .thumb-item:hover {
+            opacity: 0.9;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .thumb-item.active {
+            opacity: 1;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+            transform: scale(1.05);
+        }
+
+        /* Main Viewport Container */
+        .main-viewport-wrapper {
+            flex-grow: 1;
+            position: relative;
+            background: var(--dark);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            aspect-ratio: 3 / 4;
+            max-height: 650px;
+        }
+
+        .main-viewport {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            cursor: zoom-in;
+            overflow: hidden;
+        }
+
+        .main-viewport img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.1s ease-out;
+            display: block;
+        }
+
+        /* Zoom Lens Overlay */
+        .zoom-lens {
+            position: absolute;
+            border: 1px solid var(--accent);
+            background-color: rgba(57, 255, 20, 0.1);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+            width: 150px;
+            height: 150px;
+            border-radius: 4px;
+            visibility: hidden;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Dynamic Zoom Window (Glassmorphic Pane next to it) */
+        .zoom-result {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 15;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            visibility: hidden;
+            border-radius: 6px;
+            background-color: var(--dark);
+            transition: opacity 0.2s;
+            opacity: 0;
+        }
+        .main-viewport:hover .zoom-result {
+            opacity: 1;
+            visibility: visible;
+        }
+        .main-viewport:hover .zoom-lens {
+            visibility: visible;
+        }
+
+        .viewport-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        .vp-btn {
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .vp-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+            transform: scale(1.08);
+        }
+
+        .media-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(10, 10, 10, 0.7);
+            border: 1px solid var(--glass-border);
+            color: var(--light);
+            padding: 6px 12px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 3px;
+            backdrop-filter: blur(10px);
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        /* ------------------ RIGHT COLUMN: STICKY DETAILS PANE ------------------ */
+        .pdp-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .details-card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 40px;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .details-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .drop-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--black);
+            padding: 5px 14px;
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.25);
+        }
+        .drop-badge.sold-out {
+            background: #ff3333;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.25);
+        }
+
+        .product-title {
+            font-size: 3rem;
+            line-height: 1.05;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--light);
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            color: var(--muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+        .product-meta .category {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px 20px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            width: fit-content;
+        }
+        .price-live {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: 'Oswald', sans-serif;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.15);
+        }
+        .price-compare {
+            font-size: 1.2rem;
+            color: #555;
+            text-decoration: line-through;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .product-description {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        /* Configurator Variants */
+        .variant-group {
+            margin-bottom: 30px;
+        }
+        .variant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+        .variant-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--light);
+            text-transform: uppercase;
+        }
+        .variant-selected {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .chips-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .pdp-chip {
+            background: rgba(10, 10, 10, 0.5);
+            color: #888;
+            border: 1.5px solid #282828;
+            padding: 12px 24px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .pdp-chip:hover:not(:disabled) {
+            border-color: var(--accent);
+            color: var(--light);
+            box-shadow: 0 4px 12px rgba(57, 255, 20, 0.05);
+            transform: translateY(-2px);
+        }
+        .pdp-chip.active {
+            background: var(--accent);
+            color: var(--black);
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: scale(1.03);
+        }
+        .pdp-chip:disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+            text-decoration: line-through;
+            border-color: #1e1e1e;
+        }
+
+        /* Stock Status */
+        .stock-indicator {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #888;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pulsar {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #888;
+            position: relative;
+        }
+        .in-stock .pulsar {
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+        }
+        .in-stock .pulsar::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1.5px solid var(--accent);
+            animation: pulse-ring 1.5s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
+        }
+        .low-stock .pulsar {
+            background: #ff9900;
+            box-shadow: 0 0 8px #ff9900;
+        }
+        .out-of-stock .pulsar {
+            background: #ff3333;
+            box-shadow: 0 0 8px #ff3333;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(1.8); opacity: 0; }
+        }
+
+        /* Massive Add to Bag Button */
+        .btn-atc-massive {
+            width: 100%;
+            background: var(--accent);
+            color: var(--black);
+            border: none;
+            padding: 22px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(57, 255, 20, 0.25);
+            z-index: 1;
+        }
+        .btn-atc-massive::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: -1;
+        }
+        .btn-atc-massive:hover::before {
+            left: 100%;
+        }
+        .btn-atc-massive:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(57, 255, 20, 0.4);
+        }
+        .btn-atc-massive:disabled {
+            background: #1a1a1a;
+            color: #444;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Trust Points Grid */
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.75rem;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .trust-item i {
+            color: var(--accent);
+            font-size: 1rem;
+            text-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
+        }
+
+        /* ------------------ ACCORDION COMPONENT (STREET TAG DESIGN) ------------------ */
+        .accordion-wrapper {
+            margin-top: 40px;
+        }
+
+        .acc-item {
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 6px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            background: rgba(18, 18, 18, 0.4);
+            transition: border-color 0.3s;
+        }
+        .acc-item:hover {
+            border-color: rgba(57, 255, 20, 0.2);
+        }
+        .acc-item.active {
+            border-color: var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .acc-header {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            background: rgba(20, 20, 20, 0.5);
+            transition: background 0.3s;
+        }
+        .acc-header:hover {
+            background: rgba(57, 255, 20, 0.02);
+        }
+        .acc-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+            color: #eee;
+        }
+        .acc-title i {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+        .acc-icon {
+            font-size: 0.8rem;
+            color: #666;
+            transition: transform 0.3s;
+        }
+        .acc-item.active .acc-icon {
+            transform: rotate(180deg);
+            color: var(--accent);
+        }
+
+        .acc-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: rgba(10, 10, 10, 0.2);
+        }
+
+        .acc-content {
+            padding: 25px;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #aaa;
+        }
+
+        /* 1. Size Guide Tab Content */
+        .size-chart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .size-chart-table th {
+            background: #161616;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 10px;
+            border: 1px solid #222;
+        }
+        .size-chart-table td {
+            padding: 10px;
+            border: 1px solid #222;
+            color: #ccc;
+        }
+        .size-chart-table tr:hover td {
+            background: rgba(57, 255, 20, 0.02);
+            color: var(--light);
+        }
+
+        /* Interactive Size Finder Widget */
+        .size-finder-box {
+            background: rgba(30, 30, 30, 0.4);
+            border: 1px dashed var(--glass-border);
+            padding: 20px;
+            border-radius: 6px;
+        }
+        .finder-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .finder-title i {
+            color: var(--accent);
+        }
+        .finder-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .finder-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .finder-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #888;
+            font-weight: 700;
+        }
+        .finder-select {
+            background: #111;
+            border: 1px solid #333;
+            color: var(--light);
+            padding: 10px;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .finder-select:focus {
+            border-color: var(--accent);
+        }
+        .size-recommend-btn {
+            width: 100%;
+            background: rgba(57, 255, 20, 0.08);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .size-recommend-btn:hover {
+            background: var(--accent);
+            color: var(--black);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+        .finder-result {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            animation: fadeIn 0.4s ease;
+        }
+        .finder-result-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--black);
+            font-size: 1.1rem;
+            font-weight: 900;
+            padding: 4px 16px;
+            border-radius: 3px;
+            margin-top: 6px;
+            font-family: 'Oswald', sans-serif;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* 2. Wash & Care Street Label Tab Content */
+        .wash-label-card {
+            background: #fdfdfd;
+            color: #111;
+            padding: 25px;
+            border-radius: 2px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
+            font-family: 'Courier New', Courier, monospace;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            border-left: 2px solid #ccc;
+        }
+        .wash-label-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: repeating-linear-gradient(45deg, #000, #000 6px, #fff 6px, #fff 12px);
+        }
+        .wash-brand {
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 2px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .wash-tagline {
+            font-size: 0.55rem;
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .wash-symbols {
+            display: flex;
+            justify-content: space-around;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            border-top: 1px dashed #bbb;
+            border-bottom: 1px dashed #bbb;
+            padding: 12px 0;
+        }
+        .wash-symbols i {
+            color: #333;
+            transition: transform 0.3s;
+        }
+        .wash-symbols i:hover {
+            transform: scale(1.2);
+            color: #000;
+        }
+        .wash-rules {
+            font-size: 0.65rem;
+            line-height: 1.6;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .wash-rules li {
+            margin-bottom: 8px;
+            list-style: square;
+            margin-left: 15px;
+        }
+
+        /* 3. Tech Specs Icons */
+        .specs-bullets {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .spec-bullet {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .spec-bullet i {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+        .bullet-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .bullet-desc {
+            font-size: 0.85rem;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* ------------------ FULLSCREEN LIGHTROOM OVERLAY ------------------ */
+        .pdp-lightroom {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 5, 0.98);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+        .pdp-lightroom.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lr-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lr-img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 4px;
+            box-shadow: 0 30px 65px rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s;
+            object-fit: contain;
+        }
+
+        .lr-close {
+            position: absolute;
+            top: -40px;
+            right: 0px;
+            background: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 2.2rem;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .lr-close:hover {
+            color: var(--accent);
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        .lr-nav {
+            position: absolute;
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+        .lr-nav:hover {
+            background: var(--accent);
+            color: var(--black);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        .lr-prev {
+            left: -80px;
+        }
+        .lr-next {
+            right: -80px;
+        }
+
+        /* ------------------ MARQUEE SECTION ------------------ */
+        .marquee-wrapper {
+            width: 100vw;
+            overflow: hidden;
+            background: var(--accent);
+            color: var(--black);
+            padding: 16px 0;
+            transform: rotate(-1deg) scale(1.01);
+            margin: 80px 0 60px -40px;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 20s linear infinite;
+        }
+        .marquee span {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            padding: 0 40px;
+            display: inline-block;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ------------------ RELATED DROPS DECK Slider ------------------ */
+        .recommended-deck {
+            max-width: 1600px;
+            margin: 40px auto 100px;
+            padding: 0 40px;
+        }
+        .deck-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 35px;
+        }
+        .deck-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1;
+        }
+        .deck-title span {
+            -webkit-text-stroke: 1.5px var(--accent);
+            color: transparent;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.1);
+        }
+        .deck-nav {
+            display: flex;
+            gap: 12px;
+        }
+        .deck-btn {
+            background: var(--gray);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .deck-btn:hover {
+            background: var(--accent);
+            color: var(--black);
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: scale(1.05);
+        }
+
+        .deck-track-container {
+            width: 100%;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 20px;
+        }
+        .deck-track-container::-webkit-scrollbar {
+            height: 4px;
+        }
+        .deck-track-container::-webkit-scrollbar-thumb {
+            background: #222;
+            border-radius: 4px;
+        }
+        .deck-track-container::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        .deck-track {
+            display: flex;
+            gap: 25px;
+            width: max-content;
+        }
+
+        /* Recommendation Product Card Override */
+        .deck-card {
+            width: 280px;
+            background: rgba(18, 18, 18, 0.5);
+            border: 1px solid #1a1a1a;
+            border-radius: 6px;
+            overflow: hidden;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+        }
+        .deck-card:hover {
+            border-color: rgba(57, 255, 20, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        .deck-card-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #111;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .deck-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .deck-card:hover .deck-card-image img {
+            transform: scale(1.05);
+        }
+        .deck-card-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: var(--black);
+            font-size: 0.6rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+        .deck-card-badge.sold-out {
+            background: #ff3333;
+            color: white;
+        }
+        .deck-card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .deck-card-category {
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .deck-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .deck-card-price {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .deck-card-arrow {
+            color: #555;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .deck-card:hover .deck-card-arrow {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        /* ------------------ TOAST ALERTS ------------------ */
+        #pdp-toast {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--black);
+            padding: 18px 36px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            box-shadow: 0 15px 35px var(--accent-glow);
+            transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 4000;
+            pointer-events: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #pdp-toast.show {
+            bottom: 40px;
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(25px);
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ------------------ RESPONSIVE LAYOUTS ------------------ */
+        @media (max-width: 1100px) {
+            .pdp-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .pdp-media-theater {
+                position: relative;
+                top: 0;
+            }
+            .pdp-container {
+                margin-top: 100px;
+                padding: 0 20px;
+            }
+            .header-content {
+                padding: 0 20px;
+            }
+            .recommended-deck {
+                padding: 0 20px;
+            }
+            .marquee-wrapper {
+                margin-left: -20px;
+            }
+            .lr-prev { left: -40px; }
+            .lr-next { right: -40px; }
+        }
+
+        @media (max-width: 768px) {
+            .pdp-media-theater {
+                flex-direction: column-reverse;
+                gap: 15px;
+            }
+            .thumbnail-track {
+                flex-direction: row;
+                max-height: none;
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            .thumb-item {
+                width: 70px;
+                height: 85px;
+                flex-shrink: 0;
+            }
+            .details-card {
+                padding: 25px;
+            }
+            .product-title {
+                font-size: 2.2rem;
+            }
+            .price-live {
+                font-size: 2rem;
+            }
+            .lr-nav {
+                width: 44px;
+                height: 44px;
+                font-size: 1rem;
+            }
+            .lr-prev { left: 10px; }
+            .lr-next { right: 10px; }
+            .finder-inputs {
+                grid-template-columns: 1fr;
+            }
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+                <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">WILD SAALA</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="index.html#limited-drop">Drops</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon" id="cart-icon-desktop">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <a href="login.html" class="login-btn" id="login-btn">
+                    <i class="fas fa-user"></i>
+                    Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="pdp-container">
+        <div id="pdp-root">
+            <div style="height: 60vh; display: flex; align-items: center; justify-content: center; color: var(--accent); font-family: 'Oswald', sans-serif; font-size: 1.8rem; letter-spacing: 2px;" class="fade-up">
+                <i class="fas fa-circle-notch fa-spin" style="margin-right: 15px;"></i> LOADING THE ARMOR...
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightroom modal -->
+    <div class="pdp-lightroom" id="pdp-lightroom">
+        <div class="lr-content">
+            <button type="button" class="lr-close" id="lr-close" aria-label="Close modal">&times;</button>
+            <button type="button" class="lr-nav lr-prev" id="lr-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+            <img class="lr-img" id="lr-img" src="" alt="Zoomed view">
+            <button type="button" class="lr-nav lr-next" id="lr-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div id="pdp-toast"><i class="fas fa-check-circle" style="color:var(--black);"></i> Added to Cart Successfully</div>
+
+    <script src="product-utils.js"></script>
+    <script>
+        (function() {
+            const root = document.getElementById('pdp-root');
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id');
+
+            let product = null;
+            let variants = [];
+            let colors = [];
+            let sizes = [];
+            let images = [];
+            let currentImageIdx = 0;
+            let selectedColor = null;
+            let selectedSize = null;
+            let lastRenderedColor = undefined;
+
+            function getFilteredImages() {
+                const list = [];
+                if (product && product.image_url) {
+                    list.push(product.image_url);
+                }
+                
+                if (product && Array.isArray(product.media)) {
+                    product.media.forEach(m => {
+                        if (m.url) {
+                            if (selectedColor) {
+                                const mediaColor = (m.color || '').trim();
+                                if (!mediaColor || mediaColor.toLowerCase() === selectedColor.toLowerCase()) {
+                                    if (!list.includes(m.url)) {
+                                        list.push(m.url);
+                                    }
+                                }
+                            } else {
+                                const mediaColor = (m.color || '').trim();
+                                if (!mediaColor || colors.length === 0) {
+                                    if (!list.includes(m.url)) {
+                                        list.push(m.url);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                if (list.length === 0) {
+                    list.push('https://placehold.co/1000x1400/111/39FF14?text=Wild+Saala');
+                }
+                return list;
+            }
+
+            function updateMediaTheater() {
+                images = getFilteredImages();
+                if (currentImageIdx >= images.length) {
+                    currentImageIdx = 0;
+                }
+
+                const thumbTrack = document.getElementById('pdp-thumbnails');
+                if (thumbTrack) {
+                    thumbTrack.innerHTML = images.map((img, idx) => `
+                        <div class="thumb-item ${idx === currentImageIdx ? 'active' : ''}" data-idx="${idx}">
+                            <img src="${escapeHtml(img)}" alt="Thumbnail Preview ${idx+1}">
+                        </div>
+                    `).join('');
+
+                    thumbTrack.querySelectorAll('.thumb-item').forEach(item => {
+                        item.addEventListener('click', () => {
+                            const idx = parseInt(item.dataset.idx, 10);
+                            setMainImage(idx);
+                        });
+                    });
+                }
+
+                const mainImg = document.getElementById('pdp-main-img');
+                if (mainImg) {
+                    if (images[currentImageIdx]) {
+                        mainImg.src = images[currentImageIdx];
+                    } else {
+                        mainImg.src = 'https://placehold.co/1000x1400/111/39FF14?text=Wild+Saala';
+                    }
+                }
+            }
+
+            function escapeHtml(str) {
+                if (str == null) return '';
+                return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            }
+            function formatPrice(val) {
+                const num = Number(val);
+                return isNaN(num) ? '' : '₹' + num.toLocaleString();
+            }
+            function uniqueValues(arr, key) {
+                const vals = arr.map(x => (x[key] || '').trim()).filter(x => x);
+                return [...new Set(vals)];
+            }
+            function findVariant(c, s) {
+                return variants.find(v => {
+                    const vc = (v.color || '').trim();
+                    const vs = (v.size || '').trim();
+                    return (!c || vc === c) && (!s || vs === s);
+                });
+            }
+            function variantInStock(v) {
+                if (!v) return false;
+                const status = (v.status || '').toLowerCase();
+                if (status === 'sold out' || status === 'draft') return false;
+                if (v.stock !== undefined && Number(v.stock) <= 0) return false;
+                return true;
+            }
+
+            function showToast() {
+                const toast = document.getElementById('pdp-toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            }
+
+            function updateUI() {
+                if (selectedColor !== lastRenderedColor) {
+                    lastRenderedColor = selectedColor;
+                    updateMediaTheater();
+                }
+
+                // Update selected text markers
+                const colorVal = document.getElementById('val-color');
+                const sizeVal = document.getElementById('val-size');
+                if (colorVal) colorVal.textContent = selectedColor || 'Select';
+                if (sizeVal) sizeVal.textContent = selectedSize || 'Select';
+
+                // Update active chips styling
+                document.querySelectorAll('.color-chip').forEach(c => {
+                    if (c.textContent.trim() === selectedColor) c.classList.add('active');
+                    else c.classList.remove('active');
+                });
+                document.querySelectorAll('.size-chip').forEach(c => {
+                    if (c.textContent.trim() === selectedSize) c.classList.add('active');
+                    else c.classList.remove('active');
+                });
+
+                // Enforce valid combinations
+                if (colors.length && sizes.length) {
+                    if (selectedColor) {
+                        document.querySelectorAll('.size-chip').forEach(c => {
+                            const v = findVariant(selectedColor, c.textContent.trim());
+                            c.disabled = !v || !variantInStock(v);
+                        });
+                    } else {
+                        document.querySelectorAll('.size-chip').forEach(c => c.disabled = false);
+                    }
+                    if (selectedSize) {
+                        document.querySelectorAll('.color-chip').forEach(c => {
+                            const v = findVariant(c.textContent.trim(), selectedSize);
+                            c.disabled = !v || !variantInStock(v);
+                        });
+                    } else {
+                        document.querySelectorAll('.color-chip').forEach(c => c.disabled = false);
+                    }
+                }
+
+                // Match active variant
+                let variant = null;
+                if (variants.length === 0) {
+                    variant = null;
+                } else if (variants.length === 1) {
+                    variant = variants[0];
+                } else {
+                    const needColor = colors.length > 0;
+                    const needSize = sizes.length > 0;
+                    if ((needColor && !selectedColor) || (needSize && !selectedSize)) {
+                        variant = null;
+                    } else {
+                        variant = findVariant(selectedColor, selectedSize);
+                    }
+                }
+
+                // UI components referencing details card
+                const priceEl = document.getElementById('pdp-live-price');
+                const stockEl = document.getElementById('pdp-stock-msg');
+                const atcBtn = document.getElementById('pdp-atc');
+
+                const displayPrice = variant && variant.price ? variant.price : product.price;
+                priceEl.textContent = formatPrice(displayPrice);
+
+                if (variants.length === 0) {
+                    const isSoldOut = (product.status || '').toLowerCase() === 'sold out';
+                    stockEl.className = 'stock-indicator ' + (isSoldOut ? 'out-of-stock' : 'in-stock');
+                    stockEl.innerHTML = `<span class="pulsar"></span> ${isSoldOut ? 'Sold out globally' : 'In stock and ready to ship'}`;
+                    atcBtn.disabled = isSoldOut;
+                    atcBtn.textContent = isSoldOut ? 'SOLD OUT' : 'ADD TO BAG';
+                } else if (!variant) {
+                    stockEl.className = 'stock-indicator';
+                    stockEl.innerHTML = `<span class="pulsar"></span> Select variations to verify stock`;
+                    atcBtn.disabled = true;
+                    atcBtn.textContent = 'SELECT OPTIONS';
+                } else if (!variantInStock(variant)) {
+                    stockEl.className = 'stock-indicator out-of-stock';
+                    stockEl.innerHTML = `<span class="pulsar"></span> Currently Out of Stock`;
+                    atcBtn.disabled = true;
+                    atcBtn.textContent = 'SOLD OUT';
+                } else {
+                    const stock = Number(variant.stock);
+                    if (stock > 0 && stock <= 5) {
+                        stockEl.className = 'stock-indicator low-stock';
+                        stockEl.innerHTML = `<span class="pulsar"></span> Only ${stock} units left — Order fast!`;
+                    } else {
+                        stockEl.className = 'stock-indicator in-stock';
+                        stockEl.innerHTML = `<span class="pulsar"></span> In stock and ready to ship`;
+                    }
+                    atcBtn.disabled = false;
+                    atcBtn.textContent = 'ADD TO BAG — ' + formatPrice(displayPrice);
+                }
+            }
+
+            function handleAddToCart() {
+                let variant = null;
+                if (variants.length > 1) {
+                    variant = findVariant(selectedColor, selectedSize);
+                    if (!variant) return;
+                } else if (variants.length === 1) {
+                    variant = variants[0];
+                }
+                WildSaala.addToCart(product, variant);
+                const cartCountEl = document.getElementById('pdp-cart-count');
+                if (cartCountEl) cartCountEl.textContent = WildSaala.getCart().length;
+                showToast();
+            }
+
+            function renderChips(containerId, values, isColor) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                container.innerHTML = '';
+                values.forEach(val => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'pdp-chip fade-up ' + (isColor ? 'color-chip' : 'size-chip');
+                    btn.textContent = val;
+                    btn.addEventListener('click', () => {
+                        if (isColor) {
+                            if (selectedColor === val) selectedColor = null;
+                            else selectedColor = val;
+                        } else {
+                            if (selectedSize === val) selectedSize = null;
+                            else selectedSize = val;
+                        }
+                        updateUI();
+                    });
+                    container.appendChild(btn);
+                });
+            }
+
+            // Accordion Toggle Handling
+            function setupAccordions() {
+                document.querySelectorAll('.acc-header').forEach(header => {
+                    header.addEventListener('click', () => {
+                        const item = header.closest('.acc-item');
+                        const body = item.querySelector('.acc-body');
+                        const isActive = item.classList.contains('active');
+
+                        // Collapse all other accordions
+                        document.querySelectorAll('.acc-item').forEach(otherItem => {
+                            if (otherItem !== item) {
+                                otherItem.classList.remove('active');
+                                otherItem.querySelector('.acc-body').style.maxHeight = null;
+                            }
+                        });
+
+                        // Toggle current
+                        if (isActive) {
+                            item.classList.remove('active');
+                            body.style.maxHeight = null;
+                        } else {
+                            item.classList.add('active');
+                            body.style.maxHeight = body.scrollHeight + 'px';
+                        }
+                    });
+                });
+            }
+
+            // Size Finder Logic
+            function setupSizeFinder() {
+                const btn = document.getElementById('size-recommend-btn');
+                const resultBox = document.getElementById('finder-result');
+                const resultText = document.getElementById('finder-result-size');
+
+                if (!btn) return;
+
+                btn.addEventListener('click', () => {
+                    const height = document.getElementById('finder-height').value;
+                    const weight = document.getElementById('finder-weight').value;
+                    const fit = document.getElementById('finder-fit').value;
+
+                    let baseSize = 'M';
+                    
+                    if (height === 'tall') {
+                        baseSize = weight === 'heavy' ? 'XXL' : weight === 'mid' ? 'XL' : 'L';
+                    } else if (height === 'mid') {
+                        baseSize = weight === 'heavy' ? 'XL' : weight === 'mid' ? 'L' : 'M';
+                    } else if (height === 'petite') {
+                        baseSize = weight === 'heavy' ? 'L' : weight === 'mid' ? 'M' : 'S';
+                    } else {
+                        // short
+                        baseSize = weight === 'heavy' ? 'L' : weight === 'mid' ? 'M' : 'S';
+                    }
+
+                    // Silhouette modifier
+                    if (fit === 'oversized') {
+                        if (baseSize === 'S') baseSize = 'M';
+                        else if (baseSize === 'M') baseSize = 'L';
+                        else if (baseSize === 'L') baseSize = 'XL';
+                        else if (baseSize === 'XL') baseSize = 'XXL';
+                    } else if (fit === 'slim') {
+                        if (baseSize === 'XXL') baseSize = 'XL';
+                        else if (baseSize === 'XL') baseSize = 'L';
+                        else if (baseSize === 'L') baseSize = 'M';
+                        else if (baseSize === 'M') baseSize = 'S';
+                    }
+
+                    resultText.textContent = baseSize;
+                    resultBox.style.display = 'block';
+                });
+            }
+
+            // Image Zoom lens engine
+            function setupImageZoom() {
+                const viewport = document.getElementById('pdp-viewport');
+                const img = document.getElementById('pdp-main-img');
+                const lens = document.getElementById('pdp-zoom-lens');
+                const result = document.getElementById('pdp-zoom-result');
+
+                if (!viewport || !img || !lens || !result) return;
+
+                viewport.addEventListener('mousemove', (e) => {
+                    const rect = viewport.getBoundingClientRect();
+                    
+                    // Show elements
+                    lens.style.visibility = 'visible';
+                    result.style.visibility = 'visible';
+                    result.style.opacity = '1';
+
+                    // Mouse coords relative to image
+                    let x = e.clientX - rect.left;
+                    let y = e.clientY - rect.top;
+
+                    // Keep lens within bounds
+                    let lensWidth = lens.offsetWidth;
+                    let lensHeight = lens.offsetHeight;
+
+                    let lx = x - (lensWidth / 2);
+                    let ly = y - (lensHeight / 2);
+
+                    if (lx < 0) lx = 0;
+                    if (lx > rect.width - lensWidth) lx = rect.width - lensWidth;
+                    if (ly < 0) ly = 0;
+                    if (ly > rect.height - lensHeight) ly = rect.height - lensHeight;
+
+                    // Move lens
+                    lens.style.left = lx + 'px';
+                    lens.style.top = ly + 'px';
+
+                    // Magnified background mapping
+                    const scaleX = img.naturalWidth / rect.width;
+                    const scaleY = img.naturalHeight / rect.height;
+
+                    result.style.backgroundImage = `url('${img.src}')`;
+                    result.style.backgroundSize = `${img.naturalWidth}px ${img.naturalHeight}px`;
+                    result.style.backgroundPosition = `-${lx * scaleX}px -${ly * scaleY}px`;
+                });
+
+                viewport.addEventListener('mouseleave', () => {
+                    lens.style.visibility = 'hidden';
+                    result.style.visibility = 'hidden';
+                    result.style.opacity = '0';
+                });
+            }
+
+            // Image Swap Handler
+            function setMainImage(idx) {
+                if (idx < 0 || idx >= images.length) return;
+                currentImageIdx = idx;
+
+                const img = document.getElementById('pdp-main-img');
+                if (img) {
+                    img.style.opacity = '0';
+                    setTimeout(() => {
+                        img.src = images[idx];
+                        img.style.opacity = '1';
+                    }, 100);
+                }
+
+                // Update active state in thumbnails list
+                document.querySelectorAll('.thumb-item').forEach((item, thIdx) => {
+                    if (thIdx === idx) item.classList.add('active');
+                    else item.classList.remove('active');
+                });
+            }
+
+            // Lightroom Lightbox View
+            function setupLightbox() {
+                const lr = document.getElementById('pdp-lightroom');
+                const lrImg = document.getElementById('lr-img');
+                const closeBtn = document.getElementById('lr-close');
+                const prevBtn = document.getElementById('lr-prev');
+                const nextBtn = document.getElementById('lr-next');
+                const expandBtn = document.getElementById('pdp-expand-btn');
+
+                if (!lr || !lrImg) return;
+
+                function openLightbox() {
+                    lrImg.src = images[currentImageIdx];
+                    lr.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                }
+
+                function closeLightbox() {
+                    lr.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+
+                function navLightbox(direction) {
+                    let nextIdx = currentImageIdx + direction;
+                    if (nextIdx < 0) nextIdx = images.length - 1;
+                    if (nextIdx >= images.length) nextIdx = 0;
+                    setMainImage(nextIdx);
+                    lrImg.src = images[nextIdx];
+                }
+
+                if (expandBtn) expandBtn.addEventListener('click', openLightbox);
+                if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+                lr.addEventListener('click', (e) => {
+                    if (e.target === lr) closeLightbox();
+                });
+
+                if (prevBtn) prevBtn.addEventListener('click', () => navLightbox(-1));
+                if (nextBtn) nextBtn.addEventListener('click', () => navLightbox(1));
+
+                document.addEventListener('keydown', (e) => {
+                    if (!lr.classList.contains('show')) return;
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') navLightbox(-1);
+                    if (e.key === 'ArrowRight') navLightbox(1);
+                });
+            }
+
+            // Related Products Slider Track Load
+            async function loadRelatedDrops() {
+                const grid = document.getElementById('pdp-related-grid');
+                if (!grid) return;
+
+                try {
+                    const res = await fetch('/api/products?store=1');
+                    const allProducts = await res.json();
+                    
+                    // Filter current product and prioritize same category
+                    const related = allProducts.filter(p => String(p.id) !== String(productId) && String(p.slug) !== String(productId));
+                    
+                    if (related.length === 0) {
+                        document.querySelector('.recommended-deck').style.display = 'none';
+                        return;
+                    }
+
+                    // Render deck cards
+                    grid.innerHTML = related.map(p => {
+                        const isSoldOut = (p.status || '').toLowerCase() === 'sold out';
+                        const thumb = p.image_url || (p.media && p.media[0] && p.media[0].url) || 'https://placehold.co/300x400/111/39FF14?text=Wild+Saala';
+                        
+                        return `
+                            <div class="deck-card" onclick="window.location.href='product-details.html?id=${encodeURIComponent(p.slug || p.id)}'">
+                                <div class="deck-card-image">
+                                    <img src="${escapeHtml(thumb)}" alt="${escapeHtml(p.name)}">
+                                    ${isSoldOut ? '<span class="deck-card-badge sold-out">SOLD OUT</span>' : '<span class="deck-card-badge">DROP</span>'}
+                                </div>
+                                <div class="deck-card-title">${escapeHtml(p.name)}</div>
+                                <div class="deck-card-category">${escapeHtml(p.category || 'Apparel')}</div>
+                                <div class="deck-card-footer">
+                                    <span class="deck-card-price">${formatPrice(p.price)}</span>
+                                    <span class="deck-card-arrow"><i class="fas fa-arrow-right"></i></span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+
+                    // Hook slider navigation buttons
+                    const container = document.getElementById('deck-track-container');
+                    const prevBtn = document.getElementById('deck-prev');
+                    const nextBtn = document.getElementById('deck-next');
+
+                    if (container && prevBtn && nextBtn) {
+                        prevBtn.addEventListener('click', () => container.scrollBy({ left: -310, behavior: 'smooth' }));
+                        nextBtn.addEventListener('click', () => container.scrollBy({ left: 310, behavior: 'smooth' }));
+                    }
+
+                } catch (e) {
+                    console.error("Could not fetch recommendations:", e);
+                }
+            }
+
+            function renderProduct(p) {
+                product = p;
+                variants = Array.isArray(p.variants) ? p.variants : [];
+                const isSoldOut = (p.status || '').toLowerCase() === 'sold out';
+
+                colors = uniqueValues(variants, 'color');
+                sizes = uniqueValues(variants, 'size');
+
+                if (colors.length > 0) {
+                    selectedColor = colors[0];
+                } else if (variants.length === 1) {
+                    selectedColor = (variants[0].color || '').trim() || null;
+                    selectedSize = (variants[0].size || '').trim() || null;
+                }
+
+                const breadcrumbCat = escapeHtml(p.category || 'Collection');
+                const title = escapeHtml(p.name);
+                const desc = escapeHtml(p.description || 'Engineered for the streets. Heavyweight fabric tailored for an oversized, drop-shoulder fit. Built wild, no compromises.');
+                const compareHtml = p.compare_price ? `₹${Number(p.compare_price).toLocaleString()}` : '';
+
+                // Replace root with visual split columns grid layout
+                root.innerHTML = `
+                    <div class="pdp-wrapper">
+                        
+                        <!-- Left media column: Vertical thumbnails + Main Viewport with interactive hover zoom lens -->
+                        <div class="pdp-media-theater fade-up">
+                            <div class="thumbnail-track" id="pdp-thumbnails">
+                                <!-- Thumbnails loaded dynamically -->
+                            </div>
+                            <div class="main-viewport-wrapper">
+                                <div class="media-badge">Authentic Drop</div>
+                                <div class="main-viewport" id="pdp-viewport">
+                                    <img id="pdp-main-img" src="" alt="${escapeHtml(p.name)}">
+                                    <div class="zoom-lens" id="pdp-zoom-lens"></div>
+                                    <div class="zoom-result" id="pdp-zoom-result"></div>
+                                </div>
+                                <div class="viewport-controls">
+                                    <button class="vp-btn" id="pdp-expand-btn" title="Fullscreen Lightbox"><i class="fas fa-expand-arrows-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right details column: Sticky details card panel -->
+                        <div class="pdp-details">
+                            <div class="details-card fade-up delay-1">
+                                ${isSoldOut ? '<span class="drop-badge sold-out">Sold Out</span>' : '<span class="drop-badge">Active Drop</span>'}
+                                <div class="product-meta">
+                                    <span class="category">${breadcrumbCat}</span>
+                                    <span>&middot;</span>
+                                    <span>Original Apparel</span>
+                                </div>
+                                <h1 class="product-title">${title}</h1>
+                                
+                                <div class="price-container">
+                                    <span class="price-live" id="pdp-live-price"></span>
+                                    ${p.compare_price ? `<span class="price-compare">${compareHtml}</span>` : ''}
+                                </div>
+                                
+                                <p class="product-description">${desc}</p>
+                                
+                                ${colors.length ? `
+                                <div class="variant-group fade-up delay-2">
+                                    <div class="variant-header">
+                                        <span class="variant-title">Select Color</span>
+                                        <span class="variant-selected" id="val-color">Select</span>
+                                    </div>
+                                    <div class="chips-row" id="pdp-colors">
+                                        <!-- Color buttons rendered dynamically -->
+                                    </div>
+                                </div>` : ''}
+
+                                ${sizes.length ? `
+                                <div class="variant-group fade-up delay-3">
+                                    <div class="variant-header">
+                                        <span class="variant-title">Select Size</span>
+                                        <span class="variant-selected" id="val-size">Select</span>
+                                    </div>
+                                    <div class="chips-row" id="pdp-sizes">
+                                        <!-- Size buttons rendered dynamically -->
+                                    </div>
+                                </div>` : ''}
+                                
+                                <div id="pdp-stock-msg" class="stock-indicator fade-up delay-3">
+                                    <span class="pulsar"></span> Loading availability...
+                                </div>
+
+                                <button type="button" class="btn-atc-massive fade-up delay-3" id="pdp-atc">ADD TO BAG</button>
+                                
+                                <div class="trust-grid fade-up delay-3">
+                                    <div class="trust-item"><i class="fas fa-truck-fast"></i> Express Delivery</div>
+                                    <div class="trust-item"><i class="fas fa-rotate-left"></i> 7-day pickup</div>
+                                    <div class="trust-item"><i class="fas fa-shield-halved"></i> Secure Checkout</div>
+                                    <div class="trust-item"><i class="fas fa-circle-check"></i> Certified Drop</div>
+                                </div>
+                            </div>
+
+                            <!-- Styled Accordion Component panels -->
+                            <div class="accordion-wrapper fade-up delay-3">
+                                
+                                <!-- Tab 1: Sizing Guide measurements chart + size finder calculator -->
+                                <div class="acc-item">
+                                    <div class="acc-header">
+                                        <div class="acc-title"><i class="fas fa-ruler-combined"></i> Size Chart & Smart Finder</div>
+                                        <div class="acc-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="acc-body">
+                                        <div class="acc-content">
+                                            <table class="size-chart-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Size</th>
+                                                        <th>Chest (in)</th>
+                                                        <th>Length (in)</th>
+                                                        <th>Shoulder (in)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>S</td>
+                                                        <td>38"</td>
+                                                        <td>26"</td>
+                                                        <td>17"</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>M</td>
+                                                        <td>40"</td>
+                                                        <td>27"</td>
+                                                        <td>18"</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>L</td>
+                                                        <td>42"</td>
+                                                        <td>28"</td>
+                                                        <td>19"</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>XL</td>
+                                                        <td>44"</td>
+                                                        <td>29"</td>
+                                                        <td>20"</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>XXL</td>
+                                                        <td>46"</td>
+                                                        <td>30"</td>
+                                                        <td>21"</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <div class="size-finder-box">
+                                                <div class="finder-title"><i class="fas fa-wand-magic-sparkles"></i> AI Fit Recommender</div>
+                                                <div class="finder-inputs">
+                                                    <div class="finder-field">
+                                                        <label class="finder-label">Height</label>
+                                                        <select class="finder-select" id="finder-height">
+                                                            <option value="short">Below 5'5"</option>
+                                                            <option value="petite">5'5" - 5'8"</option>
+                                                            <option value="mid" selected>5'9" - 6'0"</option>
+                                                            <option value="tall">Above 6'0"</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="finder-field">
+                                                        <label class="finder-label">Weight</label>
+                                                        <select class="finder-select" id="finder-weight">
+                                                            <option value="light">Below 60 kg</option>
+                                                            <option value="mid" selected>60 - 75 kg</option>
+                                                            <option value="heavy">Above 75 kg</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="finder-inputs">
+                                                    <div class="finder-field" style="grid-column: 1 / -1;">
+                                                        <label class="finder-label">Preferred Style Silhouette</label>
+                                                        <select class="finder-select" id="finder-fit">
+                                                            <option value="regular">Regular Classic Silhouette</option>
+                                                            <option value="oversized" selected>Oversized Street Drape</option>
+                                                            <option value="slim">Snug Fitted Look</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <button class="size-recommend-btn" id="size-recommend-btn">Find my size</button>
+                                                <div class="finder-result" id="finder-result">
+                                                    <div style="font-size:0.75rem; text-transform:uppercase; color:#888;">We recommend you order:</div>
+                                                    <div class="finder-result-badge" id="finder-result-size">XL</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 2: Care label streetwear graphical card tag -->
+                                <div class="acc-item">
+                                    <div class="acc-header">
+                                        <div class="acc-title"><i class="fas fa-soap"></i> Wash & Care Instructions</div>
+                                        <div class="acc-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="acc-body">
+                                        <div class="acc-content">
+                                            <div class="wash-label-card">
+                                                <div class="wash-brand">WILD SAALA</div>
+                                                <div class="wash-tagline">Premium Street Armor</div>
+                                                <div class="wash-symbols">
+                                                    <i class="fas fa-soap" title="Machine Wash Cold"></i>
+                                                    <i class="fas fa-triangle-exclamation" title="Do Not Bleach"></i>
+                                                    <i class="fas fa-temperature-low" title="Tumble Dry Low"></i>
+                                                    <i class="fas fa-shirt" title="Wash Inside Out"></i>
+                                                </div>
+                                                <ul class="wash-rules">
+                                                    <li>Machine wash cold inside out with similar colors.</li>
+                                                    <li>Do not iron directly on graphics or street prints.</li>
+                                                    <li>Hang dry in shade or tumble dry on low settings.</li>
+                                                    <li>Do not dry clean this garment. Engineered to fade slightly for raw aesthetic.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 3: Detailed Tech Specs & Specifications -->
+                                <div class="acc-item">
+                                    <div class="acc-header">
+                                        <div class="acc-title"><i class="fas fa-gear"></i> Technical Specs</div>
+                                        <div class="acc-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="acc-body">
+                                        <div class="acc-content">
+                                            <div class="specs-bullets">
+                                                <div class="spec-bullet">
+                                                    <i class="fas fa-cubes"></i>
+                                                    <div>
+                                                        <div class="bullet-label">Fabric Quality</div>
+                                                        <div class="bullet-desc">${escapeHtml(p.fabric_details || 'Premium heavy-knit 100% organic loopback cotton. Pre-shrunk and bio-washed for extreme softness.')}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="spec-bullet">
+                                                    <i class="fas fa-compass"></i>
+                                                    <div>
+                                                        <div class="bullet-label">Fit Specification</div>
+                                                        <div class="bullet-desc">Drop-shoulder street fit, featuring broad sleeves and deep hood cuts designed for perfect silhouette styling.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="spec-bullet">
+                                                    <i class="fas fa-fingerprint"></i>
+                                                    <div>
+                                                        <div class="bullet-label">Care Tag</div>
+                                                        <div class="bullet-desc">${escapeHtml(p.care_instructions || 'Iron inside out. Wash at or below 30°C to preserve color vibrancy.')}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 4: Refund/COD Drop rules & guidelines -->
+                                <div class="acc-item">
+                                    <div class="acc-header">
+                                        <div class="acc-title"><i class="fas fa-clipboard-list"></i> Drop Rules & Returns</div>
+                                        <div class="acc-icon"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                    <div class="acc-body">
+                                        <div class="acc-content">
+                                            <p style="margin-bottom:15px;">Each WILD SAALA drop is produced in highly limited numbers to maintain drop scarcity. Verify guidelines below:</p>
+                                            <ul style="padding-left:15px; font-size:0.85rem; display:flex; flex-direction:column; gap:10px;">
+                                                <li><strong>Prepaid Priority:</strong> All prepaid orders receive instant priority fulfillment dispatch.</li>
+                                                <li><strong>Cash on Delivery (COD):</strong> Verified COD available nationwide. Order details are validated via automated IVR/SMS confirmations.</li>
+                                                <li><strong>No-Hassle 7-Day Returns:</strong> If size doesn't fit or product contains drop issues, requests for returns or sizing exchanges are processed within 7 days. Logistics picking is managed completely at our cost.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Marquee Ticker -->
+                    <div class="marquee-wrapper">
+                        <div class="marquee">
+                            <span>WILD SAALA</span><span>&middot;</span>
+                            <span>STREET ARMOR</span><span>&middot;</span>
+                            <span>LIMITED RUN</span><span>&middot;</span>
+                            <span>NO COMPROMISES</span><span>&middot;</span>
+                            <span>WILD SAALA</span><span>&middot;</span>
+                            <span>STREET ARMOR</span><span>&middot;</span>
+                            <span>LIMITED RUN</span><span>&middot;</span>
+                            <span>NO COMPROMISES</span>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Complete the Gear Slider section -->
+                    <div class="recommended-deck">
+                        <div class="deck-header">
+                            <h2 class="deck-title">COMPLETE THE <span>GEAR</span></h2>
+                            <div class="deck-nav">
+                                <button class="deck-btn" id="deck-prev" aria-label="Slide Left"><i class="fas fa-chevron-left"></i></button>
+                                <button class="deck-btn" id="deck-next" aria-label="Slide Right"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="deck-track-container" id="deck-track-container">
+                            <div class="deck-track" id="pdp-related-grid">
+                                <div style="color:var(--muted); font-size:0.9rem; padding: 20px;">FETCHING RELATED DROPS...</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                document.title = `${title} | WILD SAALA`;
+
+                // Render Variant Chips
+                if (colors.length) renderChips('pdp-colors', colors, true);
+                if (sizes.length) renderChips('pdp-sizes', sizes, false);
+
+                // Setup interactive components
+                setupImageZoom();
+                setupLightbox();
+                setupAccordions();
+                setupSizeFinder();
+                loadRelatedDrops();
+
+                document.getElementById('pdp-atc').addEventListener('click', handleAddToCart);
+                lastRenderedColor = undefined;
+                updateUI();
+            }
+
+            async function init() {
+                // Initialize cart count
+                const cartCountEl = document.getElementById('pdp-cart-count');
+                if (cartCountEl) cartCountEl.textContent = WildSaala.getCart().length;
+
+                if (!productId) {
+                    root.innerHTML = '<div style="height:60vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;"><h2>NO DROP SELECTED</h2><a href="shop.html" class="back-btn"><i class="fas fa-arrow-left"></i> RETURN TO SHOP</a></div>';
+                    return;
+                }
+                try {
+                    const p = await WildSaala.fetchProduct(productId);
+                    renderProduct(p);
+                } catch (e) {
+                    root.innerHTML = '<div style="height:60vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;"><h2>DROP NOT FOUND</h2><p style="color:#aaa;">This street drop may have sold out or been vaulted.</p><a href="shop.html" class="back-btn"><i class="fas fa-arrow-left"></i> RETURN TO SHOP</a></div>';
+                }
+            }
+
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.05 });
+
+            // Initialize after small delay to let DOM paint
+            setTimeout(() => {
+                init().then(() => {
+                    document.querySelectorAll('.fade-up').forEach(el => {
+                        el.style.animationPlayState = 'paused';
+                        observer.observe(el);
+                    });
+                });
+            }, 100);
+            
+        })();
+    </script>
+            <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Shop All</a></li>
+                        <li><a href="hoodies.html">All Hoodies</a></li>
+                        <li><a href="tees.html">T-Shirts</a></li>
+                        <li><a href="tracks.html">Tracks</a></li>
+                        <li><a href="caps.html">Caps</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="sizeguide.html">Size Guide</a></li>
+                        <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchanges</a></li>
+                        <li><a href="washcare.html">Care Instructions</a></li>
+                        <li><a href="contactus.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul class="footer-links">
+                        <li><a href="ourstory.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="contactus.html">Customer Support</a></li>
+                        <li><a href="contactus.html">Wholesale Inquiries</a></li>
+                        <li><a href="collab.html">Collab Requests</a></li>
+                    </ul>
+                    
+                    <div class="social-icons">
+                        <a href="https://instagram.com" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://threads.net" class="social-icon" target="_blank"><i class="fab fa-threads"></i></a>
+                        <a href="https://whatsapp.com" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trust-badges">
+                <div class="badge"><i class="fas fa-lock"></i> SSL Secure</div>
+                <div class="badge"><i class="fas fa-credit-card"></i> Razorpay</div>
+                <div class="badge"><i class="fas fa-truck"></i> Cash on Delivery</div>
+                <div class="badge"><i class="fas fa-shield-alt"></i> 7-Day Returns</div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 WILD SAALA. All rights reserved. | <a href="shippingpolicy.html" style="color: #888; text-decoration: none;">Privacy Policy</a> | <a href="returns.html" style="color: #888; text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+            <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="index.html" class="mobile-nav-item">
+                <i class="fas fa-home mobile-nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="shop.html" class="mobile-nav-item">
+                <i class="fas fa-shopping-bag mobile-nav-icon"></i>
+                <span>Shop</span>
+            </a>
+            <a href="contactus.html" class="mobile-nav-item">
+                <i class="fas fa-question-circle mobile-nav-icon"></i>
+                <span>Contact Us</span>
+            </a>
+            <a href="index.html#limited-drop" class="mobile-nav-item">
+                <i class="fas fa-bolt mobile-nav-icon"></i>
+                <span>Drops</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobile-cart-icon">
+                <i class="fas fa-shopping-cart mobile-nav-icon"></i>
+                <span>Cart (<span class="cart-count-mobile">0</span>)</span>
+            </a>
+            <a href="login.html" class="mobile-nav-item" id="mobile-login-btn">
+                <i class="fas fa-user mobile-nav-icon"></i>
+                <span>Account</span>
+            </a>
+        </div>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!--
+    Developer Signature & Watermark
+    Name: Mada Dhivakar
+    Contact: dhivakarmada@gmail.com
+    Project: Wild Saala E-Commerce Platform
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WILD SAALA | Limited Drops</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --light: #f5f5f5;
+            --accent: #39FF14; /* Neon Green */
+            --accent-alt: #00BFFF; /* Cyber Blue */
+            --gray: #333333;
+            --overlay: rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        p {
+            line-height: 1.7;
+            font-size: clamp(0.9rem, 1.05vw, 1.1rem);
+            color: #ccc;
+        }
+
+        section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-center h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Hero Banner */
+        .page-hero {
+            background: radial-gradient(circle, transparent 20%, var(--black) 70%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23111111"/><path d="M0 0 L100 100" stroke="%23222" stroke-width="0.5"/><path d="M100 0 L0 100" stroke="%23222" stroke-width="0.5"/></svg>');
+            background-size: auto;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 120px;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .page-hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+            margin-bottom: 15px;
+        }
+
+        .page-hero-content p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 800px;
+            margin: 0 auto;
+            color: #aaa;
+        }
+
+        /* Standard Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--accent);
+            color: var(--black);
+            border: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: var(--black);
+            color: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        /* Content grids/layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        /* Additional CSS tags for specific pages */
+        .card {
+            background: rgba(30, 30, 30, 0.5);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--gray);
+            padding: 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.15);
+            transform: translateY(-5px);
+        }
+
+        /* Specific classes for forms, lists, timelines */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            padding: 20px 30px;
+            position: relative;
+            border-left: 2px solid var(--accent);
+            margin-left: 20px;
+        }
+
+        .timeline-badge {
+            position: absolute;
+            left: -11px;
+            top: 24px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="product-utils.css">
+</head>
+<body>
+
+        <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">WILD SAALA</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="index.html#limited-drop">Drops</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon" id="cart-icon-desktop">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <a href="login.html" class="login-btn" id="login-btn">
+                    <i class="fas fa-user"></i>
+                    Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Limited Drop Registry</h1>
+            <p>Chronology of raw drops, upcoming releases, and past archives.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container" style="max-width: 900px;">
+            <div class="card" id="active-drop-card" style="margin-bottom: 50px; border-color: var(--accent); box-shadow: 0 0 25px rgba(57, 255, 20, 0.2);">
+                <div class="grid-2" style="align-items: center;">
+                    <div id="drop-img-element" style="height: 400px; background: #222; border: 1px solid var(--gray); border-radius: 4px;"></div>
+                    <div>
+                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Next Couture Drop</span>
+                        <h2 id="drop-heading" style="font-size: 2rem; margin: 10px 0 15px; border:none; color:#fff;">MIDNIGHT COUTURE</h2>
+                        <p id="drop-desc" style="font-size: 0.95rem; margin-bottom: 25px;">Heavyweight cotton armor, raw hems, and oversized silhouettes.</p>
+                        
+                        <div style="display: flex; gap: 15px; margin-bottom: 25px;" id="drop-countdown">
+                            <div style="background: rgba(0,0,0,0.5); padding: 10px; min-width: 60px; text-align: center; border: 1px solid var(--accent); border-radius: 4px;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);" id="days-val">00</div>
+                                <div style="font-size: 0.7rem; color: #888;">DAYS</div>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.5); padding: 10px; min-width: 60px; text-align: center; border: 1px solid var(--accent); border-radius: 4px;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);" id="hours-val">00</div>
+                                <div style="font-size: 0.7rem; color: #888;">HOURS</div>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.5); padding: 10px; min-width: 60px; text-align: center; border: 1px solid var(--accent); border-radius: 4px;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);" id="mins-val">00</div>
+                                <div style="font-size: 0.7rem; color: #888;">MINS</div>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.5); padding: 10px; min-width: 60px; text-align: center; border: 1px solid var(--accent); border-radius: 4px;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);" id="secs-val">00</div>
+                                <div style="font-size: 0.7rem; color: #888;">SECS</div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn" style="width: 100%;" id="notify-drop-btn">Register for Drop Alert</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="text-center" style="margin-bottom: 40px;">Drop Archive</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <span style="font-size: 0.8rem; color: #888;">Drop #01 — Jan 2026</span>
+                    <h3 style="margin: 10px 0; color: #fff;">Brutalist Canvas Series</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 15px;">French Terry hoodies featuring raw outer stitching, dual cargo compartments, and matte-black metal drawcord locks.</p>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #ff4d4d; border: 1px solid #ff4d4d; padding: 4px 10px; display: inline-block; border-radius: 2px;">ARCHIVED / SOLD OUT</span>
+                </div>
+                <div class="card">
+                    <span style="font-size: 0.8rem; color: #888;">Drop #02 — March 2026</span>
+                    <h3 style="margin: 10px 0; color: #fff;">Neon Defiance Shielding</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 15px;">Overdyed mineral-washed tees and track pants with fluorescent green embroidered branding and reinforced dual-layered knees.</p>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #ff4d4d; border: 1px solid #ff4d4d; padding: 4px 10px; display: inline-block; border-radius: 2px;">ARCHIVED / SOLD OUT</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const h = document.getElementById('drop-heading');
+            const d = document.getElementById('drop-desc');
+            const imgEl = document.getElementById('drop-img-element');
+            const notifyBtn = document.getElementById('notify-drop-btn');
+            
+            notifyBtn.addEventListener('click', async () => {
+                const name = await WildSaala.TribeDialog.prompt("Enter your name for notifications:");
+                if (!name) return;
+                const email = await WildSaala.TribeDialog.prompt("Enter your email address:");
+                if (!email) return;
+                
+                try {
+                    const res = await fetch('/api/notified', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ name, email })
+                    });
+                    if (res.ok) {
+                        WildSaala.TribeDialog.alert("Awesome, you have been registered in the database. Access codes will dispatch 2 hours prior to drop.");
+                    }
+                } catch(e) {
+                    console.error(e);
+                }
+            });
+            
+            try {
+                const res = await fetch('/api/limited-drop');
+                const drop = await res.json();
+                
+                h.textContent = drop.heading;
+                d.textContent = drop.description;
+                
+                const mediaHtml = WildSaala.getMediaElementHtml(drop.image_url, drop.media_type || 'image', {
+                    style: 'width:100%; height:100%; object-fit:cover; border-radius:4px;'
+                });
+                imgEl.innerHTML = mediaHtml;
+                
+                const targetStr = `${drop.release_date}T${drop.release_time}:00`;
+                const targetDate = new Date(targetStr).getTime();
+                
+                function updateCountdown() {
+                    const now = new Date().getTime();
+                    const diff = targetDate - now;
+                    
+                    if (diff <= 0) {
+                        document.getElementById('drop-countdown').innerHTML = '<h3 style="color:var(--accent);">DROP LIVE NOW</h3>';
+                        return;
+                    }
+                    
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+                    
+                    document.getElementById('days-val').textContent = String(days).padStart(2, '0');
+                    document.getElementById('hours-val').textContent = String(hours).padStart(2, '0');
+                    document.getElementById('mins-val').textContent = String(mins).padStart(2, '0');
+                    document.getElementById('secs-val').textContent = String(secs).padStart(2, '0');
+                }
+                
+                setInterval(updateCountdown, 1000);
+                updateCountdown();
+            } catch(e) {
+                console.error(e);
+            }
+        });
+    </script>
+
+        <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Shop All</a></li>
+                        <li><a href="hoodies.html">All Hoodies</a></li>
+                        <li><a href="tees.html">T-Shirts</a></li>
+                        <li><a href="tracks.html">Tracks</a></li>
+                        <li><a href="caps.html">Caps</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="sizeguide.html">Size Guide</a></li>
+                        <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchanges</a></li>
+                        <li><a href="washcare.html">Care Instructions</a></li>
+                        <li><a href="contactus.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul class="footer-links">
+                        <li><a href="ourstory.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="contactus.html">Customer Support</a></li>
+                        <li><a href="contactus.html">Wholesale Inquiries</a></li>
+                        <li><a href="collab.html">Collab Requests</a></li>
+                    </ul>
+                    
+                    <div class="social-icons">
+                        <a href="https://instagram.com" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://threads.net" class="social-icon" target="_blank"><i class="fab fa-threads"></i></a>
+                        <a href="https://whatsapp.com" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trust-badges">
+                <div class="badge"><i class="fas fa-lock"></i> SSL Secure</div>
+                <div class="badge"><i class="fas fa-credit-card"></i> Razorpay</div>
+                <div class="badge"><i class="fas fa-truck"></i> Cash on Delivery</div>
+                <div class="badge"><i class="fas fa-shield-alt"></i> 7-Day Returns</div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 WILD SAALA. All rights reserved. | <a href="shippingpolicy.html" style="color: #888; text-decoration: none;">Privacy Policy</a> | <a href="returns.html" style="color: #888; text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="product-utils.js"></script>
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="index.html" class="mobile-nav-item">
+                <i class="fas fa-home mobile-nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="shop.html" class="mobile-nav-item">
+                <i class="fas fa-shopping-bag mobile-nav-icon"></i>
+                <span>Shop</span>
+            </a>
+            <a href="contactus.html" class="mobile-nav-item">
+                <i class="fas fa-question-circle mobile-nav-icon"></i>
+                <span>Contact Us</span>
+            </a>
+            <a href="index.html#limited-drop" class="mobile-nav-item">
+                <i class="fas fa-bolt mobile-nav-icon"></i>
+                <span>Drops</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobile-cart-icon">
+                <i class="fas fa-shopping-cart mobile-nav-icon"></i>
+                <span>Cart (<span class="cart-count-mobile">0</span>)</span>
+            </a>
+            <a href="login.html" class="mobile-nav-item" id="mobile-login-btn">
+                <i class="fas fa-user mobile-nav-icon"></i>
+                <span>Account</span>
+            </a>
+        </div>
+    </nav>
+</body>
+</html>

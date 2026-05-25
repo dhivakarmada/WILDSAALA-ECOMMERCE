@@ -1,0 +1,860 @@
+<!--
+    Developer Signature & Watermark
+    Name: Mada Dhivakar
+    Contact: dhivakarmada@gmail.com
+    Project: Wild Saala E-Commerce Platform
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WILD SAALA | Size Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --light: #f5f5f5;
+            --accent: #39FF14; /* Neon Green */
+            --accent-alt: #00BFFF; /* Cyber Blue */
+            --gray: #333333;
+            --overlay: rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        p {
+            line-height: 1.7;
+            font-size: clamp(0.9rem, 1.05vw, 1.1rem);
+        }
+
+        /* Layout */
+        section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-center h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--gray);
+            color: var(--light);
+            border: 2px solid var(--gray);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover, .btn.active {
+            background: var(--accent);
+            color: var(--black);
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        header .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        header nav {
+            display: block;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        header nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        header nav ul li a:hover::after,
+        header nav ul li a.active::after {
+            width: 100%;
+        }
+
+        header nav ul li a:hover,
+        header nav ul li a.active {
+            color: var(--accent);
+        }
+
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            border-top: 1px solid var(--gray);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            color: var(--black);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray);
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Size Guide Specific Styles */
+        #size-guide-page {
+            padding-top: 120px; /* To account for the fixed header */
+        }
+        
+        .size-guide-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .size-guide-intro {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+        
+        .size-guide-intro h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .size-guide-table-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .measurement-units {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+
+        .size-guide-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            min-width: 600px; /* Ensure table doesn't get too narrow on small screens */
+        }
+
+        .size-guide-table th, .size-guide-table td {
+            padding: 15px;
+            border: 1px solid var(--gray);
+        }
+
+        .size-guide-table th {
+            background-color: var(--dark);
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .size-guide-table td {
+            background-color: var(--black);
+            color: var(--light);
+        }
+        
+        .size-guide-table tr:hover td {
+            background-color: #1a1a1a;
+            color: var(--accent);
+        }
+
+        .size-guide-tips {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .size-guide-tips h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .size-guide-tips ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .size-guide-tips li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .size-guide-tips li::before {
+            content: '»';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            line-height: 1;
+            top: 0;
+        }
+        
+        .size-guide-tips strong {
+            color: var(--light);
+        }
+        
+        /* Mobile Sticky Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 10px 0;
+            border-top: 1px solid var(--accent);
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .mobile-nav-icon {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav-item:hover .mobile-nav-icon,
+        .mobile-nav-item.active .mobile-nav-icon {
+            transform: translateY(-5px);
+            color: var(--accent);
+        }
+        .mobile-nav-item:hover,
+        .mobile-nav-item.active {
+            color: var(--accent);
+        }
+        
+        /* Media Queries for full responsiveness */
+        @media (max-width: 992px) {
+            header nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: block;
+            }
+            header {
+                padding: 10px 0;
+            }
+            header .header-content {
+                padding: 0 15px;
+            }
+            .size-guide-intro {
+                margin-bottom: 20px;
+            }
+            .size-guide-tips h3 {
+                font-size: 1.3rem;
+            }
+            footer {
+                padding: 40px 15px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-column h3::after {
+                left: 0;
+                transform: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+            .size-guide-intro p {
+                font-size: 0.9rem;
+            }
+            .size-guide-tips li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="product-utils.css">
+</head>
+<body>
+
+                <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">WILD SAALA</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="index.html#limited-drop">Drops</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon" id="cart-icon-desktop">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <a href="login.html" class="login-btn" id="login-btn">
+                    <i class="fas fa-user"></i>
+                    Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="size-guide-page">
+        <div class="container">
+            <div class="size-guide-intro">
+                <h2 class="text-center">Find Your Wild Fit</h2>
+                <p id="unit-description">All measurements are in inches.</p>
+            </div>
+
+            <div class="measurement-units">
+                <button class="btn active" data-unit="inches">Inches</button>
+                <button class="btn" data-unit="cm">Centimeters</button>
+                <button class="btn" data-unit="m">Meters</button>
+            </div>
+
+            <div class="size-guide-table-wrapper">
+                <table class="size-guide-table" id="size-table">
+                    <thead>
+                        <tr>
+                            <th id="unit-header">In Inches</th>
+                            <th>S</th>
+                            <th>M</th>
+                            <th>L</th>
+                            <th>XL</th>
+                            <th>2XL</th>
+                            <th>3XL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Chest</td>
+                            <td data-inches="40">40</td>
+                            <td data-inches="42">42</td>
+                            <td data-inches="44">44</td>
+                            <td data-inches="46">46</td>
+                            <td data-inches="48">48</td>
+                            <td data-inches="50">50</td>
+                        </tr>
+                        <tr>
+                            <td>Fleece Length</td>
+                            <td data-inches="23.5">23.5</td>
+                            <td data-inches="24.5">24.5</td>
+                            <td data-inches="25.5">25.5</td>
+                            <td data-inches="26.5">26.5</td>
+                            <td data-inches="27.5">27.5</td>
+                            <td data-inches="28.5">28.5</td>
+                        </tr>
+                        <tr>
+                            <td>Derby Length</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="2.5">2.5</td>
+                        </tr>
+                        <tr>
+                            <td>Total Length</td>
+                            <td data-inches="26">26</td>
+                            <td data-inches="27">27</td>
+                            <td data-inches="28">28</td>
+                            <td data-inches="29">29</td>
+                            <td data-inches="30">30</td>
+                            <td data-inches="31">31</td>
+                        </tr>
+                        <tr>
+                            <td>Shoulder</td>
+                            <td data-inches="17">17</td>
+                            <td data-inches="18">18</td>
+                            <td data-inches="19">19</td>
+                            <td data-inches="20">20</td>
+                            <td data-inches="21">21</td>
+                            <td data-inches="22">22</td>
+                        </tr>
+                        <tr>
+                            <td>Sleeve Length Fleece</td>
+                            <td data-inches="21.5">21.5</td>
+                            <td data-inches="22.5">22.5</td>
+                            <td data-inches="23.5">23.5</td>
+                            <td data-inches="24.5">24.5</td>
+                            <td data-inches="25.5">25.5</td>
+                            <td data-inches="26.5">26.5</td>
+                        </tr>
+                        <tr>
+                            <td>Sleeve Length Derby</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="2.5">2.5</td>
+                        </tr>
+                        <tr>
+                            <td>Sleeve Opening</td>
+                            <td data-inches="3.5">3.5</td>
+                            <td data-inches="4">4</td>
+                            <td data-inches="4">4</td>
+                            <td data-inches="4.5">4.5</td>
+                            <td data-inches="4.5">4.5</td>
+                            <td data-inches="5">5</td>
+                        </tr>
+                        <tr>
+                            <td>Pocket width at Bottom</td>
+                            <td data-inches="12">12</td>
+                            <td data-inches="12.5">12.5</td>
+                            <td data-inches="13">13</td>
+                            <td data-inches="13.5">13.5</td>
+                            <td data-inches="14">14</td>
+                            <td data-inches="14.5">14.5</td>
+                        </tr>
+                        <tr>
+                            <td>Pocket Height</td>
+                            <td data-inches="7">7</td>
+                            <td data-inches="7.5">7.5</td>
+                            <td data-inches="8">8</td>
+                            <td data-inches="8.5">8.5</td>
+                            <td data-inches="9">9</td>
+                            <td data-inches="9.5">9.5</td>
+                        </tr>
+                        <tr>
+                            <td>Hood Height</td>
+                            <td data-inches="13">13</td>
+                            <td data-inches="14">14</td>
+                            <td data-inches="15">15</td>
+                            <td data-inches="16">16</td>
+                            <td data-inches="17">17</td>
+                            <td data-inches="18">18</td>
+                        </tr>
+                        <tr>
+                            <td>Hood Width</td>
+                            <td data-inches="10">10</td>
+                            <td data-inches="10.5">10.5</td>
+                            <td data-inches="11">11</td>
+                            <td data-inches="11.5">11.5</td>
+                            <td data-inches="12">12</td>
+                            <td data-inches="12.5">12.5</td>
+                        </tr>
+                        <tr>
+                            <td>Cuff Open</td>
+                            <td data-inches="2.5">2.5</td>
+                            <td data-inches="3">3</td>
+                            <td data-inches="3">3</td>
+                            <td data-inches="3.5">3.5</td>
+                            <td data-inches="3.5">3.5</td>
+                            <td data-inches="4">4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="size-guide-tips">
+                <h3 class="text-center">How to Measure</h3>
+                <ul>
+                    <li>
+                        <strong>Chest:</strong> Place the measuring tape around the fullest part of your chest, right under your armpits.
+                    </li>
+                    <li>
+                        <strong>Shoulder:</strong> Measure from the edge of one shoulder to the other, straight across your back.
+                    </li>
+                    <li>
+                        <strong>Sleeve Length:</strong> Measure from the top of your shoulder down to your wrist.
+                    </li>
+                    <li>
+                        <strong>Total Length:</strong> Measure from the highest point on your shoulder down to the bottom hem of the garment.
+                    </li>
+                </ul>
+                <h3 class="text-center" style="margin-top: 40px;">Pro Tips:</h3>
+                <ul>
+                    <li>
+                        <strong>For an oversized fit,</strong> we recommend sizing up one size from your usual.
+                    </li>
+                    <li>
+                        <strong>If you're between sizes,</strong> consider your preferred fit. Size down for a more snug fit, or size up for a looser, more relaxed feel.
+                    </li>
+                    <li>
+                        <strong>Compare with your favorite hoodie.</strong> Lay a hoodie you already love flat and measure it, then compare those measurements to our chart.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+                <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Shop All</a></li>
+                        <li><a href="hoodies.html">All Hoodies</a></li>
+                        <li><a href="tees.html">T-Shirts</a></li>
+                        <li><a href="tracks.html">Tracks</a></li>
+                        <li><a href="caps.html">Caps</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="sizeguide.html">Size Guide</a></li>
+                        <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchanges</a></li>
+                        <li><a href="washcare.html">Care Instructions</a></li>
+                        <li><a href="contactus.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul class="footer-links">
+                        <li><a href="ourstory.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="contactus.html">Customer Support</a></li>
+                        <li><a href="contactus.html">Wholesale Inquiries</a></li>
+                        <li><a href="collab.html">Collab Requests</a></li>
+                    </ul>
+                    
+                    <div class="social-icons">
+                        <a href="https://instagram.com" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://threads.net" class="social-icon" target="_blank"><i class="fab fa-threads"></i></a>
+                        <a href="https://whatsapp.com" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trust-badges">
+                <div class="badge"><i class="fas fa-lock"></i> SSL Secure</div>
+                <div class="badge"><i class="fas fa-credit-card"></i> Razorpay</div>
+                <div class="badge"><i class="fas fa-truck"></i> Cash on Delivery</div>
+                <div class="badge"><i class="fas fa-shield-alt"></i> 7-Day Returns</div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 WILD SAALA. All rights reserved. | <a href="shippingpolicy.html" style="color: #888; text-decoration: none;">Privacy Policy</a> | <a href="returns.html" style="color: #888; text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+    
+                <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="index.html" class="mobile-nav-item">
+                <i class="fas fa-home mobile-nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="shop.html" class="mobile-nav-item">
+                <i class="fas fa-shopping-bag mobile-nav-icon"></i>
+                <span>Shop</span>
+            </a>
+            <a href="contactus.html" class="mobile-nav-item">
+                <i class="fas fa-question-circle mobile-nav-icon"></i>
+                <span>Contact Us</span>
+            </a>
+            <a href="index.html#limited-drop" class="mobile-nav-item">
+                <i class="fas fa-bolt mobile-nav-icon"></i>
+                <span>Drops</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobile-cart-icon">
+                <i class="fas fa-shopping-cart mobile-nav-icon"></i>
+                <span>Cart (<span class="cart-count-mobile">0</span>)</span>
+            </a>
+            <a href="login.html" class="mobile-nav-item" id="mobile-login-btn">
+                <i class="fas fa-user mobile-nav-icon"></i>
+                <span>Account</span>
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Conversion factors
+            const cmPerInch = 2.54;
+            const mPerInch = 0.0254;
+
+            const unitButtons = document.querySelectorAll('.measurement-units .btn');
+            const unitHeader = document.getElementById('unit-header');
+            const unitDescription = document.getElementById('unit-description');
+            const tableCells = document.querySelectorAll('#size-table tbody td:not(:first-child)');
+
+            /**
+             * Converts and updates the table values based on the selected unit.
+             * @param {string} unit - The target unit: 'inches', 'cm', or 'm'.
+             */
+            function updateTable(unit) {
+                // Update the header and description text
+                let headerText = '';
+                let descriptionText = 'All measurements are in inches.';
+                if (unit === 'cm') {
+                    headerText = 'In CM';
+                    descriptionText = 'All measurements are in centimeters.';
+                } else if (unit === 'm') {
+                    headerText = 'In Meters';
+                    descriptionText = 'All measurements are in meters.';
+                } else {
+                    headerText = 'In Inches';
+                    descriptionText = 'All measurements are in inches.';
+                }
+                unitHeader.textContent = headerText;
+                unitDescription.textContent = descriptionText;
+
+                // Iterate through the cells and update values
+                tableCells.forEach(cell => {
+                    const inches = parseFloat(cell.dataset.inches);
+                    let value = inches;
+                    if (unit === 'cm') {
+                        value = inches * cmPerInch;
+                        // Round to 1 decimal place for cm
+                        cell.textContent = value.toFixed(1);
+                    } else if (unit === 'm') {
+                        value = inches * mPerInch;
+                        // Round to 2 decimal places for meters
+                        cell.textContent = value.toFixed(2);
+                    } else {
+                        // Display original inch value
+                        cell.textContent = inches;
+                    }
+                });
+            }
+
+            // Add event listeners to the unit buttons
+            unitButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    unitButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to the clicked button
+                    button.classList.add('active');
+                    // Get the unit from the data attribute and update the table
+                    const unit = button.dataset.unit;
+                    updateTable(unit);
+                });
+            });
+
+            // Initial call to set the table to inches on page load
+            updateTable('inches');
+
+            // Highlight active mobile nav item based on URL
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+            const currentPath = window.location.pathname.split('/').pop();
+            
+            mobileNavItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === currentPath) {
+                    item.classList.add('active');
+                } else if (currentPath === '' && item.getAttribute('href') === 'index.html') {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+    <script src="product-utils.js"></script>
+</body>
+</html>

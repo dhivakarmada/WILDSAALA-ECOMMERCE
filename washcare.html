@@ -1,0 +1,746 @@
+<!--
+    Developer Signature & Watermark
+    Name: Mada Dhivakar
+    Contact: dhivakarmada@gmail.com
+    Project: Wild Saala E-Commerce Platform
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WILD SAALA | Care Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --light: #f5f5f5;
+            --accent: #39FF14; /* Neon Green */
+            --accent-alt: #00BFFF; /* Cyber Blue */
+            --gray: #333333;
+            --overlay: rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--light);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        p {
+            line-height: 1.7;
+            font-size: clamp(0.9rem, 1.05vw, 1.1rem);
+        }
+        
+        .section-intro {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+        
+        .section-intro h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Layout */
+        section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        header .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        header nav {
+            display: block;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        header nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        header nav ul li a:hover::after,
+        header nav ul li a.active::after {
+            width: 100%;
+        }
+
+        header nav ul li a:hover,
+        header nav ul li a.active {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            border-top: 1px solid var(--gray);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            color: var(--black);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray);
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Mobile Sticky Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 10px 0;
+            border-top: 1px solid var(--accent);
+        }
+
+        .mobile-nav-items {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .mobile-nav-icon {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav-item:hover .mobile-nav-icon,
+        .mobile-nav-item.active .mobile-nav-icon {
+            transform: translateY(-5px);
+            color: var(--accent);
+        }
+        .mobile-nav-item:hover,
+        .mobile-nav-item.active {
+            color: var(--accent);
+        }
+
+        /* --- New Care Guide Page Styles --- */
+        #care-guide-page {
+            padding-top: 120px;
+        }
+
+        .care-hero {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://placehold.co/1920x800/1a1a1a/222222?text=CARE+GUIDE+HERO+IMAGE');
+            background-size: cover;
+            background-position: center;
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light);
+            position: relative;
+        }
+
+        .care-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+        
+        .care-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+        
+        .care-hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        }
+
+        .care-instructions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        
+        .care-instruction-card {
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--gray);
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .care-instruction-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(57, 255, 20, 0.1));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .care-instruction-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(57, 255, 20, 0.4);
+        }
+        
+        .care-instruction-card:hover::before {
+            opacity: 1;
+        }
+        
+        .card-icon {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: var(--light);
+            transition: all 0.3s ease;
+        }
+        
+        .care-instruction-card:hover .card-icon svg {
+            fill: var(--accent);
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.5));
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card-description {
+            font-size: 0.95rem;
+            color: #ccc;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mend-it-wildly {
+            background: linear-gradient(135deg, var(--dark), #222);
+            border: 2px solid var(--accent);
+            padding: 50px;
+            border-radius: 10px;
+            margin: 60px auto;
+            max-width: 900px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.3);
+        }
+        
+        .mend-it-wildly::before {
+            content: '🔥';
+            font-size: 120px;
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            opacity: 0.1;
+            transform: rotate(-25deg);
+        }
+        
+        .mend-it-wildly h3 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--accent);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .mend-it-wildly p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+        
+        .mend-tips-list {
+            list-style: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .mend-tips-list li {
+            position: relative;
+            padding-left: 40px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .mend-tips-list li::before {
+            content: '»';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            line-height: 1;
+            top: 0;
+        }
+
+        /* Media Queries for full responsiveness */
+        @media (max-width: 992px) {
+            header nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: block;
+            }
+            header {
+                padding: 10px 0;
+            }
+            header .header-content {
+                padding: 0 15px;
+            }
+            .section-intro {
+                margin-bottom: 20px;
+            }
+            footer {
+                padding: 40px 15px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-column h3::after {
+                left: 0;
+                transform: none;
+            }
+            .care-hero {
+                height: 30vh;
+            }
+            .mend-it-wildly {
+                padding: 30px;
+            }
+        }
+        @media (max-width: 576px) {
+            .care-instructions-grid {
+                grid-template-columns: 1fr;
+            }
+            .mend-it-wildly h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="product-utils.css">
+</head>
+<body>
+
+                <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">WILD SAALA</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="index.html#limited-drop">Drops</a></li>
+                    <li><a href="contactus.html">Contact Us</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon" id="cart-icon-desktop">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <a href="login.html" class="login-btn" id="login-btn">
+                    <i class="fas fa-user"></i>
+                    Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="care-guide-page">
+        <div class="care-hero">
+            <div class="care-hero-content">
+                <h1>The Care Code</h1>
+                <p>Rules for rebels. A guide to preserving your threads and staying wild.</p>
+            </div>
+        </div>
+
+        <div class="container" style="padding-top: 60px;">
+            <div class="section-intro">
+                <h2>The Wash Ritual</h2>
+                <p>Your hoodie is a statement. Here's how to treat it like one and ensure it stays true to its core.</p>
+            </div>
+
+            <div class="care-instructions-grid">
+                
+                <div class="care-instruction-card">
+                    <div class="card-icon">
+                        <!-- SVG for Washing -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tshirt">
+                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><path d="M11 2L11 7"></path><path d="M11 2C11 1.44772 11.4477 1 12 1H13C13.5523 1 14 1.44772 14 2V7"></path>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Wash in Cold Water</h3>
+                    <p class="card-description">To protect the fabric and maintain vibrant colors, always wash your garment inside out in cold water on a gentle cycle.</p>
+                </div>
+                
+                <div class="care-instruction-card">
+                    <div class="card-icon">
+                         <!-- SVG for Drying -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun">
+                            <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Air Dry in Shade</h3>
+                    <p class="card-description">Hang your hoodie to dry in the shade. High heat from a tumble dryer can cause shrinkage and damage the print.</p>
+                </div>
+                
+                <div class="care-instruction-card">
+                    <div class="card-icon">
+                        <!-- SVG for No Wringing -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                            <circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Do Not Wring</h3>
+                    <p class="card-description">Gently squeeze out excess water. Wringing can stretch the fibers and distort the shape of the garment.</p>
+                </div>
+                
+                <div class="care-instruction-card">
+                    <div class="card-icon">
+                         <!-- SVG for No Ironing -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash">
+                            <circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">No Ironing on Print</h3>
+                    <p class="card-description">The graphics are a key part of your wild style. Iron your hoodie inside out and avoid direct contact with the print.</p>
+                </div>
+                
+                <div class="care-instruction-card">
+                    <div class="card-icon">
+                        <!-- SVG for Dry Cleaning -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-droplet">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 11-11.32 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Do Not Dry Clean</h3>
+                    <p class="card-description">The chemicals used in dry cleaning can be harsh on our fabrics and prints. Hand wash or machine wash as instructed.</p>
+                </div>
+                
+                <div class="care-instruction-card">
+                    <div class="card-icon">
+                        <!-- SVG for Storage -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive">
+                            <polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Storage Secrets</h3>
+                    <p class="card-description">Fold your hoodie rather than hanging it to prevent stretching. Store it in a cool, dry place to protect the fabric.</p>
+                </div>
+            </div>
+
+            <div class="mend-it-wildly">
+                <h3>Embrace the Imperfect: Mend It Wildly</h3>
+                <p>A tear is not a mistake; it's a new chapter. Turn a flaw into a feature with these rebel tips.</p>
+                <ul class="mend-tips-list">
+                    <li>A tear is a story. Use a contrasting thread to sew up rips and make the repair a deliberate design element.</li>
+                    <li>Stains can be covered with a custom embroidered patch, turning a flaw into a unique feature.</li>
+                    <li>When your hoodie is ready for a new life, upcycle it into a tote bag, cushion cover, or anything else you can imagine.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+                <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="shop.html">Shop All</a></li>
+                        <li><a href="hoodies.html">All Hoodies</a></li>
+                        <li><a href="tees.html">T-Shirts</a></li>
+                        <li><a href="tracks.html">Tracks</a></li>
+                        <li><a href="caps.html">Caps</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="sizeguide.html">Size Guide</a></li>
+                        <li><a href="shippingpolicy.html">Shipping Policy</a></li>
+                        <li><a href="returns.html">Returns & Exchanges</a></li>
+                        <li><a href="washcare.html">Care Instructions</a></li>
+                        <li><a href="contactus.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul class="footer-links">
+                        <li><a href="ourstory.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="contactus.html">Customer Support</a></li>
+                        <li><a href="contactus.html">Wholesale Inquiries</a></li>
+                        <li><a href="collab.html">Collab Requests</a></li>
+                    </ul>
+                    
+                    <div class="social-icons">
+                        <a href="https://instagram.com" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://threads.net" class="social-icon" target="_blank"><i class="fab fa-threads"></i></a>
+                        <a href="https://whatsapp.com" class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trust-badges">
+                <div class="badge"><i class="fas fa-lock"></i> SSL Secure</div>
+                <div class="badge"><i class="fas fa-credit-card"></i> Razorpay</div>
+                <div class="badge"><i class="fas fa-truck"></i> Cash on Delivery</div>
+                <div class="badge"><i class="fas fa-shield-alt"></i> 7-Day Returns</div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 WILD SAALA. All rights reserved. | <a href="shippingpolicy.html" style="color: #888; text-decoration: none;">Privacy Policy</a> | <a href="returns.html" style="color: #888; text-decoration: none;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+    
+                <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="index.html" class="mobile-nav-item">
+                <i class="fas fa-home mobile-nav-icon"></i>
+                <span>Home</span>
+            </a>
+            <a href="shop.html" class="mobile-nav-item">
+                <i class="fas fa-shopping-bag mobile-nav-icon"></i>
+                <span>Shop</span>
+            </a>
+            <a href="contactus.html" class="mobile-nav-item">
+                <i class="fas fa-question-circle mobile-nav-icon"></i>
+                <span>Contact Us</span>
+            </a>
+            <a href="index.html#limited-drop" class="mobile-nav-item">
+                <i class="fas fa-bolt mobile-nav-icon"></i>
+                <span>Drops</span>
+            </a>
+            <a href="#" class="mobile-nav-item" id="mobile-cart-icon">
+                <i class="fas fa-shopping-cart mobile-nav-icon"></i>
+                <span>Cart (<span class="cart-count-mobile">0</span>)</span>
+            </a>
+            <a href="login.html" class="mobile-nav-item" id="mobile-login-btn">
+                <i class="fas fa-user mobile-nav-icon"></i>
+                <span>Account</span>
+            </a>
+        </div>
+    </nav>
+    <script src="product-utils.js"></script>
+</body>
+</html>
