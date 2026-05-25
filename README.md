@@ -80,7 +80,7 @@ graph TD
 ### Setup & Run
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/wildsaala.git
+   git clone https://github.com/dhivakarmada/wildsaala.git
    cd wildsaala
    ```
 
@@ -173,5 +173,5 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more details.
 
 * **Developer**: Mada Dhivakar
 * **Email**: dhivakarmada@gmail.com
-* **GitHub Portfolio**: [Mada Dhivakar Github](https://github.com/mada-dhivakar) *(placeholder)*
-* **Project Link**: [https://github.com/your-username/wildsaala](https://github.com/your-username/wildsaala)
+* **GitHub Portfolio**: [Mada Dhivakar Github](https://github.com/dhivakarmada) *(placeholder)*
+* **Project Link**: [https://github.com/your-username/wildsaala](https://github.com/dhivakarmada/WILDSAALA-ECOMMERCE)
