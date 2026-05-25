@@ -22,33 +22,8 @@
 
 
 </div>
----
-
-## 📖 About & Project Overview
-
-**Wild Saala** is a premium, high-performance e-commerce platform and business intelligence ecosystem specifically optimized for modern streetwear brands. Combining a high-end minimalist dark theme with robust backend mechanics, it delivers an enterprise-grade digital storefront experience with zero third-party framework overhead.
-
-### 🌟 Core Specialities & Capabilities
-
-* **Modern Design Aesthetics**: A gorgeous dark UI featuring glassmorphism, responsive navigation grids, and interactive micro-animations that respond fluidly to user events.
-* **Indian Market Localization**: Built-in validations for state-level select menus and strict 6-digit PIN code numeric validations, ensuring high-fidelity delivery mapping.
-* **Full-Stack Autonomy**: A clean architecture decoupling the presentation layer from the Node.js Express server and SQLite3 database instance.
-* **Invisible Signature Watermarking**: Built-in codebase verification containing authorship data embedded cleanly within script headers.
-
-### ⚙️ Functional Features
-
-1. **Inventory System**: Multi-dimensional variant mapper linking sizes and colors to dynamic stock levels with automatic "Sold Out" badge triggers.
-2. **Cart Persistence**: Native client-side state storage ensuring user shopping carts persist across page transitions and browser reloads.
-3. **Coupon Engine**: Custom discount validator supporting specialized prepaid coupon keys (e.g. `WD20`) that dynamically invalidate if checkout settings are changed to Cash on Delivery (COD).
-4. **Order Management**: End-to-end transactional storage logging detailed order details, customer addresses, payment methods, and fulfillment states.
-5. **Analytics Suite**: Admin-facing data visualization tracking total revenue, live order counts, category distribution, and email waitlists.
-6. **Payment & Checkout Flow**: Guided multi-step checkout with instant address validation and layout responsiveness.
-7. **Authentication Check**: Seamless customer checking utilizing cached local storage variables to pre-fill active user sessions.
-8. **Real-time Updates**: Interactive search query filtering, category dropdown sorting, and live active filter chip updates on the storefront.
-9. **Performance Optimization**: Ultra-fast page speed index achieved via lightweight vanilla code execution and indexed SQL queries.
 
 ---
-
 
 ## 📈 Key Metrics & Architecture
 

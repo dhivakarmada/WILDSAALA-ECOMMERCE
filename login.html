@@ -33,11 +33,12 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--black);
             color: var(--light);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            justify-content: flex-start;
+            overflow-x: hidden;
             position: relative;
         }
 
@@ -75,6 +76,12 @@
             max-width: 450px;
             padding: 20px;
             z-index: 10;
+            margin-top: 100px; /* Clear fixed header */
+            margin-bottom: 50px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .auth-card {
@@ -332,7 +339,7 @@
 
         .back-home {
             position: fixed;
-            top: 30px;
+            top: 20px;
             left: 30px;
             color: #888;
             text-decoration: none;
@@ -344,6 +351,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s ease;
+            z-index: 1010;
         }
 
         .back-home:hover {
@@ -391,6 +399,12 @@
         }
 
         /* Responsive */
+        @media (max-width: 992px) {
+            .back-home {
+                display: none;
+            }
+        }
+
         @media (max-width: 480px) {
             .auth-card {
                 padding: 30px 20px;
