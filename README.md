@@ -9,7 +9,7 @@
   [![GitHub license](https://img.shields.io/badge/License-MIT-39FF14.svg?style=for-the-badge&logo=github&logoColor=black)](LICENSE)
   [![Node Version](https://img.shields.io/badge/Node-v18%2B-00BFFF.svg?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
   [![DB Database](https://img.shields.io/badge/Database-SQLite3-yellow.svg?style=for-the-badge&logo=sqlite&logoColor=white)](#architecture)
-  [![Vercel Style](https://img.shields.io/badge/UX%2FUI-Premium%20Dark-ff007f.svg?style=for-the-badge&logo=figma&logoColor=white)](#design-aesthetics)
+  [![Vercel Style](https://img.shields.io/badge/UX%2FUI-Premium%20Dark%20&%20GenZ%20vibed%20UI&UX-ff007f.svg?style=for-the-badge&logo=figma&logoColor=white)](#design-aesthetics)
 
   <p align="center">
     <a href="#key-features">Key Features</a> •
