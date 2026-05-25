@@ -20,7 +20,6 @@
     <a href="#contributing">Contributing</a>
   </p>
 
-  <img src="under-construction.jpg" alt="Wild Saala Premium Interface Mockup" width="100%" style="border-radius: 8px; border: 1px solid #222; box-shadow: 0 20px 40px rgba(0,0,0,0.8);" />
 
 </div>
 
