@@ -1422,6 +1422,7 @@
             }
             function variantInStock(v) {
                 if (!v) return false;
+                if ((product.status || '').toLowerCase() === 'sold out') return false;
                 const status = (v.status || '').toLowerCase();
                 if (status === 'sold out' || status === 'draft') return false;
                 if (v.stock !== undefined && Number(v.stock) <= 0) return false;
@@ -1456,8 +1457,13 @@
                     else c.classList.remove('active');
                 });
 
-                // Enforce valid combinations
-                if (colors.length && sizes.length) {
+                const isProductSoldOut = (product.status || '').toLowerCase() === 'sold out';
+
+                // Enforce valid combinations & sold out state
+                if (isProductSoldOut) {
+                    document.querySelectorAll('.size-chip').forEach(c => c.disabled = true);
+                    document.querySelectorAll('.color-chip').forEach(c => c.disabled = true);
+                } else if (colors.length && sizes.length) {
                     if (selectedColor) {
                         document.querySelectorAll('.size-chip').forEach(c => {
                             const v = findVariant(selectedColor, c.textContent.trim());
@@ -1500,7 +1506,12 @@
                 const displayPrice = variant && variant.price ? variant.price : product.price;
                 priceEl.textContent = formatPrice(displayPrice);
 
-                if (variants.length === 0) {
+                if (isProductSoldOut) {
+                    stockEl.className = 'stock-indicator out-of-stock';
+                    stockEl.innerHTML = `<span class="pulsar"></span> Sold out globally`;
+                    atcBtn.disabled = true;
+                    atcBtn.textContent = 'SOLD OUT';
+                } else if (variants.length === 0) {
                     const isSoldOut = (product.status || '').toLowerCase() === 'sold out';
                     stockEl.className = 'stock-indicator ' + (isSoldOut ? 'out-of-stock' : 'in-stock');
                     stockEl.innerHTML = `<span class="pulsar"></span> ${isSoldOut ? 'Sold out globally' : 'In stock and ready to ship'}`;
